@@ -35,13 +35,23 @@ Please delete options that are not relevant.
 - [ ] There are no merge conflicts
 
 @ken1286
+
 @Jackcornellober
+
 @duckets615
+
 @ceejaay
+
 @AshenPheonix
+
 @shannonyoshi
+
 @Rice-from-data
+
 @mjmangus16
+
 @livjab
+
 @kmacmckee
+
 
