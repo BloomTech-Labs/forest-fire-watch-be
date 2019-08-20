@@ -32,24 +32,20 @@ To get the server running locally:
 
 🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
 
-#### Organization Routes
+#### Auth Routes
 
-| Method | Endpoint                | Access Control | Description                                  |
-| ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/organizations/:orgId` | all users      | Returns the information for an organization. |
-| PUT    | `/organizatoins/:orgId` | owners         | Modify an existing organization.             |
-| DELETE | `/organizations/:orgId` | owners         | Delete an organization.                      |
+| Method | Endpoint               | Access Control | Description                                  |
+| ------ | ---------------------- | -------------- | -------------------------------------------- |
+| POST   | `/api/auth/register`   | all users      | Takes in a JSON with username and password keys. Returns a JSON Web Token (string) as res.token |
+| POST   | `/api/auth/login`      | all users      | Modify an existing organization.             |
 
 #### User Routes
 
-| Method | Endpoint                | Access Control      | Description                                        |
-| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/users/current`        | all users           | Returns info for the logged in user.               |
-| GET    | `/users/org/:userId`    | owners, supervisors | Returns all users for an organization.             |
-| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                    |
-| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
-| PUT    | `/users/:userId`        | owners, supervisors |                                                    |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                    |
+| Method | Endpoint             | Access Control | Description                                                                  |
+| ------ | -------------------- | -------------- | ---------------------------------------------------------------------------- |
+| GET    | `/api/users/session` | all users      | Returns info for the logged in user.                                         |
+| PUT    | `/api/users/`        | all users      | Takes in a JSON like this: { username: "newName" } and updates the username. |
+| DELETE | `/api/users/`        | all users      | Deletes the logged in user.                                                  |
 
 # Data Model
 
