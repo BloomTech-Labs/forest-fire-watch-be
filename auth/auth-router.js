@@ -25,7 +25,9 @@ router.post("/register", (req, res) => {
     .first()
     .then(user1 => {
       if (user1) {
-        res.status(409).json({ error: "A user with that name already exists" });
+        res
+          .status(409)
+          .json({ username: "A user with that name already exists" });
       } else {
         Users.add(user).then(saved => {
           Users.findBy({ username: user.username })
