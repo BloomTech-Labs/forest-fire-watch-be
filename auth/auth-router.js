@@ -10,8 +10,8 @@ router.post('/register', (req, res) => {
   const hash = bcrypt.hashSync(user.password, 10); // 2 ^ n
   user.password = hash;
 
-  Users.findBy({ username: user.username }).first().then(user => {
-    if (user) {
+  Users.findBy({ username: user.username }).first().then(user1 => {
+    if (user1) {
       res.status(409).json({ message: "A user with that name already exists" })
     } else {
         Users.add(user)
@@ -29,9 +29,6 @@ router.post('/register', (req, res) => {
     })
     }
   })
-
-
-
 });
 
 router.post('/login', (req, res) => {
