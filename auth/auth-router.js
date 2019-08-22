@@ -80,7 +80,7 @@ function generateToken(user) {
     username: user.username
   };
 
-  const jwtSecret = process.env.JWT_SECRET || "Spoofmail Secret!";
+  const jwtSecret = process.env.JWT_SECRET || "FireFlight Secret!";
   const jwtOptions = {
     expiresIn: "1d"
   };

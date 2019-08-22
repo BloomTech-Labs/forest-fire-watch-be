@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 module.exports = (req, res, next) => {
 
   const token = req.headers.authorization
-  const secret = process.env.JWT_SECRET || 'Spoofmail Secret!';
+  const secret = process.env.JWT_SECRET || 'FireFlight Secret!';
 
   if (token) {
     jwt.verify(token, secret, {}, (err, decoded) => {
