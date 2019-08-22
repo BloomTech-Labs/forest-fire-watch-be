@@ -3,7 +3,7 @@ const isEmpty = require("./is-empty");
 
 module.exports = function validateRegisterInput(data) {
   let errors = {
-    // name:
+    // name: "error description",
     // status: false or true
   };
 

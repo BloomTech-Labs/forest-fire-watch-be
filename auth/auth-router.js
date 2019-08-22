@@ -9,10 +9,13 @@ const validateRegisterInput = require("../validation/register");
 
 // for endpoints beginning with /api/auth
 router.post("/register", (req, res) => {
-  // The validation function returns an object with a string that describes the error and a boolean that says if there is or isn't an error
-
+  // INPUT VALIDATION EXPLANATION
+  // We pass { username: "username", password: "password"} into the validation function.
+  // Inside the validation function it checks that the username and password meets certain criteria.
+  // If there are no errors then isValid is returned as true and we continue on with the rest of the post request.
+  // If there is an error, we return a status 400 along with the errors object that includes all the error descriptions that were encountered
   const { errors, isValid } = validateRegisterInput(req.body);
-  // Check Validation
+
   if (!isValid) {
     return res.status(400).json(errors);
   }
