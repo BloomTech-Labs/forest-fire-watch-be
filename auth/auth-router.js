@@ -76,7 +76,7 @@ router.post("/login", (req, res) => {
           errors.username = "That username does not exist";
         }
         if (user && !bcrypt.compareSync(password, user.password)) {
-          errors.password = "Incorrect password";
+          errors.password = "Login failed";
         }
         return res.status(400).json(errors);
       }
