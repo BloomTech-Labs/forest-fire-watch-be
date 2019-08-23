@@ -4,11 +4,13 @@ exports.up = function(knex) {
   
       locations
         .float('latitude')
-        .notNullable();
         
       locations
         .float('longitude')
-        .notNullable();
+    
+      locations
+        .string('address', 128)
+        .notNullable();  
 
       locations
           .integer('user_id')
