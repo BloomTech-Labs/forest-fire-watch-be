@@ -18,6 +18,9 @@ To get the server running locally:
 - **yarn install** to install all required dependencies
 - **yarn server** to start the local server
 - **yarn test** to start server using testing environment
+- **yarn knex migrate:lateset** to create the tabes in the dev environment
+- **yarn knex seed:run** to clear the DB and populate it with seed data **** Password for all seed users is "password" ****
+
 
 ### Backend framework goes here
 
@@ -46,6 +49,14 @@ To get the server running locally:
 | GET    | `/api/users/session` | all users      | Returns info for the logged in user.                                         |
 | PUT    | `/api/users/`        | all users      | Takes in a JSON like this: { username: "newName" } and updates the username. |
 | DELETE | `/api/users/`        | all users      | Deletes the logged in user.                                                  |
+
+#### Location Routes
+
+| Method | Endpoint               | Access Control | Description                                                                                                                            |
+| ------ | ---------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| GET    | `/api/locations/`      | all users      | Returns a list of locations for the logged in user.                                                                                    |
+| POST   | `/api/locations/`      | all users      | Takes in a JSON with "latitude", "longitude", "address", and a FOREIGN KEY called "user_id" and adds a location to the logged in user. |
+| DELETE | `/api/locations/:id`   | all users      | Deletes the location with the ID provided (only if the user owns that location)                                                        |
 
 # Data Model
 
