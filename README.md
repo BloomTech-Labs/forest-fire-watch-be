@@ -56,6 +56,7 @@ To get the server running locally:
 | ------ | ---------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | GET    | `/api/locations/`      | all users      | Returns a list of locations for the logged in user.                                                                                    |
 | POST   | `/api/locations/`      | all users      | Takes in a JSON with "latitude", "longitude", "address", and a FOREIGN KEY called "user_id" and adds a location to the logged in user. |
+| PUT    | `/api/locations/:id`   | all users      | Updates the location with the ID provided (only if the user owns that location)                                                        |
 | DELETE | `/api/locations/:id`   | all users      | Deletes the location with the ID provided (only if the user owns that location)                                                        |
 
 # Data Model
