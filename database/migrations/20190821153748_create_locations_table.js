@@ -3,13 +3,20 @@ exports.up = function(knex) {
       locations.increments();
   
       locations
-        .float('latitude')
+        .float('latitude');
         
       locations
-        .float('longitude')
+        .float('longitude');
     
       locations
         .string('address', 128)
+        .notNullable();  
+        
+      locations
+        .string('address_label', 128);  
+
+      locations
+        .integer('radius')
         .notNullable();  
 
       locations
