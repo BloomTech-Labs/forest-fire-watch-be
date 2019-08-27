@@ -18,9 +18,9 @@ function findBy(filter) {
 }
 
 async function add(location) {
-  const [id] = await db('locations').insert(location, "id");
+  const [id] = await db('locations').insert(location, 'id');
 
-  return findById(id);
+  return findById(id);  
 }
 
 function findById(id) {
