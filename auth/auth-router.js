@@ -6,6 +6,7 @@ const Users = require("../models/users/users-model.js");
 
 // Load error handling and validation for inputs
 const validateRegisterInput = require("../validation/register");
+const validateLoginInput = require("../validation/login");
 
 // for endpoints beginning with /api/auth
 router.post("/register", (req, res) => {
@@ -52,6 +53,12 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
+  const { errors, isValid } = validateLoginInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   let { username, password } = req.body;
 
   Users.findBy({ username })
@@ -65,7 +72,13 @@ router.post("/login", (req, res) => {
           token
         });
       } else {
-        res.status(401).json({ message: "Invalid Credentials" });
+        if (!user) {
+          errors.username = "That username does not exist";
+        }
+        if (user && !bcrypt.compareSync(password, user.password)) {
+          errors.password = "Login failed";
+        }
+        return res.status(400).json(errors);
       }
     })
     .catch(error => {
