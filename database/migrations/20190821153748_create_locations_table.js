@@ -20,6 +20,9 @@ exports.up = function(knex) {
         .notNullable();  
 
       locations
+        .integer('last_alert')
+
+      locations
           .integer('user_id')
           .unsigned()
           .notNullable()

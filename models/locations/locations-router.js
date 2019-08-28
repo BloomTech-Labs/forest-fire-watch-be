@@ -22,7 +22,7 @@ router.get('/', restricted, async (req, res) => {
 
 router.post('/', restricted, async (req, res) => {
     try {
-        const location = await Locations.add(req.body);
+        const location = await Locations.add({...req.body, user_id: req.jwt.user_id });
 
         if (location) {
             res.status(200).json(location);

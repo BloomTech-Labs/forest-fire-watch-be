@@ -525,13 +525,17 @@
     date-fns "^1.29.0"
     http-call "^5.2.3"
 
-"@heroku-cli/plugin-webhooks-v5@^7.24.0":
-  version "7.24.0"
-  resolved "https://registry.yarnpkg.com/@heroku-cli/plugin-webhooks-v5/-/plugin-webhooks-v5-7.24.0.tgz#39beac4d8c3e0ff31f18ec399f4a02e9511a645c"
-  integrity sha512-TR7T7MXLDoWCP+b2+Bd7BUz7GG4ICZBHRjATDl0GtrrsROCgr/lnLdfhNRKuFYWgYVuBrXTyDHD9k5vzXUNQaw==
+"@heroku-cli/plugin-webhooks@^7.29.0":
+  version "7.29.0"
+  resolved "https://registry.yarnpkg.com/@heroku-cli/plugin-webhooks/-/plugin-webhooks-7.29.0.tgz#168481d44f8af1dea8074c4d576417b5011b0100"
+  integrity sha512-Vkd4RqvdgSooS4vIaqJ1AmDRLf7rXuK4tAH8KYtsG4RWp17gwkksoYVj+fCEfbOjUR2f16IFwGwG8eyUxyak8Q==
   dependencies:
-    "@heroku-cli/command" "^8.2.10"
-    heroku-cli-util "^8.0.11"
+    "@heroku-cli/color" "^1.1.14"
+    "@heroku-cli/command" "^8.2.11"
+    "@oclif/command" "^1"
+    "@oclif/config" "^1"
+    cli-ux "^5.2.1"
+    tslib "^1"
 
 "@heroku-cli/schema@^1.0.25":
   version "1.0.25"
@@ -3069,10 +3073,10 @@ heroku-exec-util@0.7.3:
     temp "0.8.3"
     uuid "3.2.1"
 
-heroku@^7.26.2:
-  version "7.28.0"
-  resolved "https://registry.yarnpkg.com/heroku/-/heroku-7.28.0.tgz#1e0a0655348e22c895d03138ff83514b963a82b9"
-  integrity sha512-n3rtb0MhFSIg69Filacb7nPSkMOYY2MPJsyegolX9PzQzalNJOVTjJl6m/0o+3uARZ1wDX33EF2kjUf6TpvInw==
+heroku@^7.29.0:
+  version "7.29.0"
+  resolved "https://registry.yarnpkg.com/heroku/-/heroku-7.29.0.tgz#a8b135c647b67dd162708035024f7159cad2c1ce"
+  integrity sha512-PnOXfCKrU6MgmEKTUTDcT4V0+M3vGxMRklN0GeoLcsBiwOkzqxOih0yzJyS5BJxhFtSNxPpcFjZf5X2q/AMxPQ==
   dependencies:
     "@heroku-cli/color" "1.1.14"
     "@heroku-cli/command" "^8.2.10"
@@ -3100,7 +3104,7 @@ heroku@^7.26.2:
     "@heroku-cli/plugin-run-v5" "^7.24.0"
     "@heroku-cli/plugin-spaces" "^7.27.0"
     "@heroku-cli/plugin-status" "^7.24.0"
-    "@heroku-cli/plugin-webhooks-v5" "^7.24.0"
+    "@heroku-cli/plugin-webhooks" "^7.29.0"
     "@oclif/command" "1.5.18"
     "@oclif/config" "1.13.2"
     "@oclif/errors" "1.2.2"
