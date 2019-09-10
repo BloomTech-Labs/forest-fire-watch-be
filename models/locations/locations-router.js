@@ -2,6 +2,7 @@ const router = require("express").Router();
 
 const Locations = require("./locations-model.js");
 const restricted = require("../../auth/restricted-middleware.js");
+const axios = require("axios");
 
 router.get("/", restricted, async (req, res) => {
   try {
@@ -21,18 +22,35 @@ router.get("/", restricted, async (req, res) => {
 
 router.post("/", restricted, async (req, res) => {
   try {
-    const location = await Locations.add({
-      ...req.body,
-      user_id: req.jwt.user_id
-    });
 
-    if (location) {
-      res.status(200).json(location);
-    } else {
-      res
-        .status(404)
-        .json({ message: `You're missing data from a required field` });
-    }
+    let user_latitude;
+    let user_longitude;
+
+    axios.get(`https://api.opencagedata.com/geocode/v1/json?q=${req.body.address}&key=${process.env.GEO_CODE_KEY}`).then(async result => {
+
+      console.log(result)
+
+      user_latitude = result.data.results[0].geometry.lat;
+      user_longitude = result.data.results[0].geometry.lng;
+
+
+
+      const location = await Locations.add({
+        ...req.body,
+        user_id: req.jwt.user_id,
+        latitude: user_latitude,
+        longitude: user_longitude
+      });
+
+      if (location) {
+        res.status(200).json(location);
+      } else {
+        res
+          .status(404)
+          .json({ message: `You're missing data from a required field` });
+      }
+
+    })
   } catch (error) {
     // log error to server
     console.log(error);
