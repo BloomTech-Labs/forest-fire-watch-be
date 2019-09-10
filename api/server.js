@@ -2,7 +2,7 @@ const express = require("express");
 const helmet = require("helmet");
 const cors = require("cors");
 
-const scheduler = require("./scheduler");
+const scheduler = require("./scheduler/scheduler");
 
 const authRouter = require("../auth/auth-router.js");
 const usersRouter = require("../models/users/users-router.js");
