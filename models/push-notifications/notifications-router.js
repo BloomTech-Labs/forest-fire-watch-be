@@ -1,5 +1,3 @@
-const express = require('express');
-const app=express();
 const router = require('express').Router();
 const webpush = require('web-push');
 const Notifications=require('./notifications-model.js');
@@ -35,6 +33,4 @@ router.post('/register',restricted,async (req,res)=>{
     }
 })
 
-router.post('/update',async (req,res)={
-    //tbd
-})
+module.exports = router
