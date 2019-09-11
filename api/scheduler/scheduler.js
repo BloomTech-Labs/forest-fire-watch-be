@@ -1,6 +1,7 @@
 const cron = require("node-cron");
 const Locations = require("../../models/locations/locations-model");
 const Users = require("../../models/users/users-model");
+const { alertMessage } = require("../../sms/twilio");
 
 const scheduler_functions = require("./scheduler_functions");
 
@@ -49,10 +50,18 @@ cron.schedule("20,40,59 * * * * *", async function() {
 
   alertLocations = new Set(alertLocations);
   console.log(alertLocations);
+
   // Step 3: compare each location to the array of fire data
   // Step 4: determine if location has fire data True / False
   // Step 5: if true push the location name and user id into a separate array
   //    - loop through the array to get each locations user information.
+
+  alertLocations.forEach(alertLoc => {
+    if (alertLoc.receive_sms && alertLoc.notification_timer === 0) {
+      alertMessage();
+    }
+  });
+
   // Step 6: send alert via push notification / sms message if alert is true
 });
 
