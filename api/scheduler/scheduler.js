@@ -9,7 +9,7 @@ const scheduler_functions = require("./scheduler_functions");
 
 // Add new geocoding into the add location api call.
 
-cron.schedule("20,40,59 * * * * *", async function() {
+cron.schedule("10,20,30,40,59 * * * * *", async function() {
   console.log("running a task every minute");
 
   // Step 1: Get all the fires in the USA.
@@ -49,16 +49,23 @@ cron.schedule("20,40,59 * * * * *", async function() {
   });
 
   alertLocations = new Set(alertLocations);
-  console.log(alertLocations);
+  // console.log(alertLocations);
 
   // Step 3: compare each location to the array of fire data
   // Step 4: determine if location has fire data True / False
   // Step 5: if true push the location name and user id into a separate array
   //    - loop through the array to get each locations user information.
 
-  alertLocations.forEach(alertLoc => {
+  alertLocations.forEach(async alertLoc => {
     if (alertLoc.receive_sms && alertLoc.notification_timer === 0) {
       alertMessage();
+      
+    }
+    // console.log(alertLoc.notification_timer)
+    if (alertLoc.notification_timer === 12) {
+      await Locations.update(alertLoc.id, {notification_timer: 0})
+    } else {
+    await Locations.update(alertLoc.id, {notification_timer: alertLoc.notification_timer + 1})
     }
   });
 

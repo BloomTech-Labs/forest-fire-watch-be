@@ -6,7 +6,6 @@ exports.seed = function(knex, Promise) {
       cell_number: 123456789,
       receive_sms: true,
       receive_push: false,
-      notification_timer: 0
     },
     {
       username: "danielle",
@@ -14,7 +13,6 @@ exports.seed = function(knex, Promise) {
       cell_number: 123456789,
       receive_sms: true,
       receive_push: false,
-      notification_timer: 0
     },
     {
       username: "antonio",
@@ -22,7 +20,6 @@ exports.seed = function(knex, Promise) {
       cell_number: 123456789,
       receive_sms: true,
       receive_push: false,
-      notification_timer: 0
     },
     {
       username: "galileo",
@@ -30,7 +27,6 @@ exports.seed = function(knex, Promise) {
       cell_number: 123456789,
       receive_sms: true,
       receive_push: false,
-      notification_timer: 0
     }
   ]);
 };
