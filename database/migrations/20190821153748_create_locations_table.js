@@ -21,6 +21,9 @@ exports.up = function(knex) {
 
       locations
         .integer('last_alert')
+      
+      locations
+        .integer("notification_timer").default(0);
 
       locations
           .integer('user_id')
