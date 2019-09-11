@@ -10,6 +10,7 @@ exports.up = function(knex) {
     users.integer("cell_number");
     users.boolean("receive_sms").default(false);
     users.boolean("receive_push").default(false);
+    users.integer("notification_timer").default(0);
   });
 };
 

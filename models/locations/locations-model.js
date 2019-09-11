@@ -15,13 +15,19 @@ function find() {
 }
 
 function findAll() {
-  return db("locations").select(
-    "user_id",
-    "address",
-    "latitude",
-    "longitude",
-    "radius"
-  );
+  return db("locations")
+    .join("users", "users.id", "locations.user_id")
+    .select(
+      "locations.user_id",
+      "locations.address",
+      "locations.latitude",
+      "locations.longitude",
+      "locations.radius",
+      "users.cell_number",
+      "users.receive_sms",
+      "users.receive_push",
+      "users.notification_timer"
+    );
 }
 
 function findBy(filter) {
