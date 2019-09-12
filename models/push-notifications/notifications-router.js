@@ -27,8 +27,11 @@ router.post('/register',restricted,async (req,res)=>{
 
 router.post('/saveios',restricted,async (req,res)=>{
     const subscription = req.body
+    if(!'deviceId' in subscription){
+        res.status(400).json({message:'deviceId not included'})
+    }
     try {
-        let sub=subscription.deviceID
+        let sub=subscription.deviceId
         let userSub=Notifications.add({subscription:sub,type:'ios',user_id:req.jwt.user_id})
 
         if(userSub)
