@@ -19,5 +19,7 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-    return knex.schema.dropIfTableExists('notifications');
+    return knex.schema.dropTableIfExists('notifications');
 };
+
+
