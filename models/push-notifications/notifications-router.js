@@ -6,14 +6,16 @@ const pusher = require('../../push/helper.js')
 router.post('/register',restricted,async (req,res)=>{
     const subscription=req.body
     let sub = JSON.stringify(subscription)
-    let userSub = Notifications.add({subscription:sub, type:'web',user_id:req.jwt.user_id})
+    let userSub = await Notifications.add({subscription:sub, type:'web',user_id:req.jwt.user_id})
     
     try {
         if(userSub)
             res.status(201).json({});
         else
             res.status(400).json({message:'information not saved'})
-        pusher(subscription,{
+
+        console.log('user subscription recorded', req.jwt.user_id);
+        await pusher(req.jwt.user_id,{
             title:"Saved",
             body:'Your subscription has been saved. You will now recieve Fire Data based on your location when it is an emergency'
         })
