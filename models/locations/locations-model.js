@@ -44,7 +44,7 @@ async function add(location) {
 function findById(id) {
   return db("locations")
     .where({ id })
-    .first();
+    .last();
 }
 
 function remove(id) {

@@ -10,7 +10,7 @@ router.get("/", restricted, async (req, res) => {
     if (userLocations.length) {
       res.json(userLocations);
     } else {
-      res.send(err);
+      res.send('no saved locations');
     }
   } catch (error) {
     console.log(error);
