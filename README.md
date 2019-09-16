@@ -61,40 +61,36 @@ To get the server running locally:
 
 # Data Model
 
-🚫This is just an example. Replace this with your data model
 
-#### 2️⃣ ORGANIZATIONS
+#### Users
 
 ---
 
 ```
 {
   id: UUID
-  name: STRING
-  industry: STRING
-  paid: BOOLEAN
-  customer_id: STRING
-  subscription_id: STRING
+  username: STRING
+  password: STRING 
+  cellphone: INTEGER
+  receive_sms: BOOLEAN
+  receive_push: BOOLEAN
 }
 ```
 
-#### USERS
+#### Locations
 
 ---
 
 ```
 {
-  id: UUID
-  organization_id: UUID foreign key in ORGANIZATIONS table
-  first_name: STRING
-  last_name: STRING
-  role: STRING [ 'owner', 'supervisor', 'employee' ]
-  email: STRING
-  phone: STRING
-  cal_visit: BOOLEAN
-  emp_visit: BOOLEAN
-  emailpref: BOOLEAN
-  phonepref: BOOLEAN
+  latitude: FLOAT
+  longitued: FLOAT
+  address: STRING
+  address_label: STRING
+  radius: INTEGER
+  last_alert: INTEGER
+  notification_timer: INTEGER
+  
 }
 ```
 
