@@ -33,22 +33,37 @@ describe('/api/auth/register', () => {
 
   })
 
-  it("should return a  400 code when there is a duplicate user", async () => {
+  it("should return a  409 code when the username already exists", async () => {
+    request(server)
+      .post("/api/auth/register")
+      .send({username: "username123", password: "password"})
     let response = await request(server)
       .post("/api/auth/register")
       .send({username: "username", password: "password"})
-    expect(response.status).toBe(400)
+    expect(response.status).toBe(409)
 
   })
   it("should return a message that says A user with than name already exists", async () => {
-    request(server)
+    await request(server)
       .post("/api/auth/register")
       .send({username: "username123", password: "password"})
     let response = await request(server)
       .post("/api/auth/register")
       .send({username: "username123", password: "password"})
     // console.log(response)
-    expect(response).toBe("A user with that name already exists")
+    expect(response.text).toBe("{\"username\":\"A user with that name already exists\"}")
   })
+
+  it("should should return a messagde when user successfully logs in", async () => {
+    await request(server)
+      .post("/api/auth/register")
+      .send({username: "username123", password: "password"})
+    let response = await request(server)
+      .post("/api/auth/login")
+      .send({username: "username123", password: "password"})
+    // console.log(response)
+    expect(response["text"]).toBe("Welcome username123")
+  })
+
 })
 
