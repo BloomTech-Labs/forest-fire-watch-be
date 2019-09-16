@@ -9,6 +9,7 @@ webpush.setVapidDetails('mailto:fireflightapp@gmail.com',publicVapid,privateVapi
 
 /**
  * push to a service
+ * @param {string}   id id of user
  * @param {object} configs title: main title to display, body: body to display
  */
 const push=async (id,configs)=>{
