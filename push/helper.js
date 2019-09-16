@@ -42,7 +42,7 @@ const push=async (id,configs)=>{
                 keyId:process.env.IOS_KEY_ID,
                 teamID:process.env.IOS_TEAM
             },
-            production:false
+            production:true
         }
 
         const provider=new iospush.Provider(token)
