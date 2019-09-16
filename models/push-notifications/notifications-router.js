@@ -41,7 +41,7 @@ router.post('/saveios',restricted,async (req,res)=>{
         else
             res.status(400).json({message:'information not saved properly'})
 
-        pusher(subscription,{
+        pusher(sub,{
             title:'Saved',
             body:'You will now recieve Fire Data based on your location when it is an emergency'
         })

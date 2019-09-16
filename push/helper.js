@@ -9,6 +9,7 @@ webpush.setVapidDetails('mailto:fireflightapp@gmail.com',publicVapid,privateVapi
 
 /**
  * push to a service
+ * @param {string}   id id of user
  * @param {object} configs title: main title to display, body: body to display
  */
 const push=async (id,configs)=>{
@@ -41,7 +42,7 @@ const push=async (id,configs)=>{
                 keyId:process.env.IOS_KEY_ID,
                 teamID:process.env.IOS_TEAM
             },
-            production:false
+            production:true
         }
 
         const provider=new iospush.Provider(token)
