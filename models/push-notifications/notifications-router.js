@@ -35,12 +35,11 @@ router.post('/saveios',restricted,async (req,res)=>{
     try {
         let sub=subscription.deviceId
         let userSub=Notifications.add({subscription:sub,type:'ios',user_id:req.jwt.user_id})
-
+        
         if(userSub)
             res.status(201).json({})
         else
             res.status(400).json({message:'information not saved properly'})
-
         pusher(sub,{
             title:'Saved',
             body:'You will now recieve Fire Data based on your location when it is an emergency'
