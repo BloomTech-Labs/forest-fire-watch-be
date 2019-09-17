@@ -34,12 +34,12 @@ describe('/api/auth/register', () => {
   })
 
   it("should return a  409 code when the username already exists", async () => {
-    request(server)
+    await request(server)
       .post("/api/auth/register")
       .send({username: "username123", password: "password"})
     let response = await request(server)
       .post("/api/auth/register")
-      .send({username: "username", password: "password"})
+      .send({username: "username123", password: "password"})
     expect(response.status).toBe(409)
 
   })
@@ -50,8 +50,8 @@ describe('/api/auth/register', () => {
     let response = await request(server)
       .post("/api/auth/register")
       .send({username: "username123", password: "password"})
-    // console.log(response)
-    expect(response.text).toBe("{\"username\":\"A user with that name already exists\"}")
+    console.log(response.status)
+    expect(JSON.parse(response.text)["username"]).toBe("A user with that name already exists")
   })
 
   it("should should return a messagde when user successfully logs in", async () => {
@@ -62,7 +62,7 @@ describe('/api/auth/register', () => {
       .post("/api/auth/login")
       .send({username: "username123", password: "password"})
     // console.log(response)
-    expect(response["text"]).toBe("Welcome username123")
+    expect(JSON.parse(response.text)["message"]).toBe("Welcome username123!")
   })
 
 })
