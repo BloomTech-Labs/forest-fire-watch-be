@@ -25,9 +25,10 @@ function findAll() {
       "locations.longitude",
       "locations.radius",
       "locations.notification_timer",
+      "locations.notifications",
       "users.cell_number",
       "users.receive_sms",
-      "users.receive_push",
+      "users.receive_push"
     );
 }
 

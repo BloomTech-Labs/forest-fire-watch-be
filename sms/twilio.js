@@ -12,7 +12,7 @@ function alertMessage(body, to) {
   client.messages
     .create({
       body: "TESTING",
-      to: "+15628330376", // Text this number 1(234)567-8910
+      to: "+17162137444", // Text this number 1(234)567-8910
       from: "+14243961692" // Ken's test account
     })
     .then(message => console.log(message.sid))
