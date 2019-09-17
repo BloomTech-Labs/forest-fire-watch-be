@@ -48,7 +48,7 @@ const push=async (id,configs)=>{
 
             let notification = new iospush.Notification()
 
-            notification.expiry=Math.floor(Date.now()/1000)+3600, //1 hour
+            notification.expiry=Math.floor(Date.now()/1000)+3600 //1 hour
             notification.alert=configs.body
             notification.topic=process.env.IOS_BUNDLE_ID
 
