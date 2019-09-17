@@ -15,11 +15,14 @@ exports.up = function(knex) {
         notifications
             .string('subscription')
             .notNullable();
-  })
+        
+        notifications
+            .string('type')
+            .notNullable();
+    })
 };
 
 exports.down = function(knex) {
     return knex.schema.dropTableIfExists('notifications');
+  
 };
-
-

@@ -7,11 +7,7 @@ const axios = require("axios");
 router.get("/", restricted, async (req, res) => {
   try {
     let userLocations = await Locations.findBy({ user_id: req.jwt.user_id });
-    if (userLocations.length) {
-      res.json(userLocations);
-    } else {
-      res.send(err);
-    }
+    res.json(userLocations);
   } catch (error) {
     console.log(error);
     res.status(500).json({
