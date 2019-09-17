@@ -39,15 +39,15 @@ const push=async (id,configs)=>{
                 token:{
                     key:process.env.IOS_KEY,
                     keyId:process.env.IOS_KEY_ID,
-                    teamID:process.env.IOS_TEAM
+                    teamId:process.env.IOS_TEAM
                 },
                 production:true
             }
             
             const provider=new apn.Provider(options)
-
+            console.log(provider);
             let notification = await new apn.Notification()
-            console.error({...notification})
+            console.log(notification)
             notification.expiry=Math.floor(Date.now()/1000)+3600 //1 hour
             notification.alert=configs.body
             notification.topic=process.env.IOS_BUNDLE_ID
