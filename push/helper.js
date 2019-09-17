@@ -1,5 +1,5 @@
 const webpush = require('web-push')
-const iospush = require('apn')
+const apn = require('apn')
 
 const privateVapid=process.env.VAPID_PRIVATE;
 const publicVapid=process.env.VAPID_PUBLIC;
@@ -44,18 +44,18 @@ const push=async (id,configs)=>{
                 production:true
             }
             
-            const provider=new iospush.Provider(options)
+            const provider=new apn.Provider(options)
 
-            let notification = new iospush.Notification()
+            let notification = await new apn.Notification()
 
             notification.expiry=Math.floor(Date.now()/1000)+3600 //1 hour
             notification.alert=configs.body
             notification.topic=process.env.IOS_BUNDLE_ID
 
-            console.log('provider',notification)
+            console.log('provider',{...provider})
 
             const res = await provider.send(notification,subData)
-            console.log('response', res);
+            // console.log('response', res);
             provider.shutdown()
         }catch(err){
             console.error({...err})
