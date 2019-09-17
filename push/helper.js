@@ -21,7 +21,7 @@ const push=async (id,configs)=>{
     else
         subData=subscription.subscription
     
-    if(typeof(subData)!=="string"){
+    if(subscription.type=='web'){
         try {
             console.log('here');
             const payload=JSON.stringify(configs);
@@ -43,7 +43,8 @@ const push=async (id,configs)=>{
                 },
                 production:true
             }
-
+            console.log('options',options)
+            
             const provider=new iospush.Provider(options)
 
             let notification = new iospush.Notification({
@@ -55,8 +56,8 @@ const push=async (id,configs)=>{
                 topic: process.env.IOS_BUNDLE_ID,
                 pushType:'alert'
             })
-            console.log('provider')
-            console.log(notification);
+            console.log('provider',notification)
+
             const res = await provider.send(notification,subData)
 
             provider.shutdown()
