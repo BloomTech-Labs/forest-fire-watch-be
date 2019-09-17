@@ -47,7 +47,7 @@ const push=async (id,configs)=>{
             const provider=new apn.Provider(options)
 
             let notification = await new apn.Notification()
-
+            console.error({...notification})
             notification.expiry=Math.floor(Date.now()/1000)+3600 //1 hour
             notification.alert=configs.body
             notification.topic=process.env.IOS_BUNDLE_ID
