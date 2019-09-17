@@ -34,6 +34,7 @@ router.post('/saveios',restricted,async (req,res)=>{
     }
     try {
         let sub=subscription.deviceId
+        console.log(sub)
         let userSub=Notifications.add({subscription:sub,type:'ios',user_id:req.jwt.user_id})
         
         if(userSub)
