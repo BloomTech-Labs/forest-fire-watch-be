@@ -40,10 +40,11 @@ const push=async (id,configs)=>{
                     key:process.env.IOS_KEY,
                     keyId:process.env.IOS_KEY_ID,
                     teamID:process.env.IOS_TEAM
-                }
+                },
+                production:true
             }
 
-            const provider=new iospush.Provider(token)
+            const provider=new iospush.Provider(options)
 
             let notification = new iospush.Notification({
                 alert:{
