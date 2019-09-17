@@ -21,7 +21,7 @@ const push=async (id,configs)=>{
     else
         subData=subscription.subscription
     
-    if('endpoint' in subData){
+    if(typeof(subData)!=="string"){
         try {
             console.log('here');
             const payload=JSON.stringify(configs);
