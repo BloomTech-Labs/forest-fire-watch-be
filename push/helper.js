@@ -20,7 +20,7 @@ const push=async (id,configs)=>{
         subData=JSON.parse(subscription.subscription)
     else
         subData=subscription.subscription
-    
+    console.log('initial', subscription)
     if(subscription.type=='web'){
         try {
             console.log('here');
