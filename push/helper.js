@@ -34,15 +34,13 @@ const push=async (id,configs)=>{
             console.error("Error processing Push: ",err.message);
         }
     }else{
-        console.err('Great Mighty Hero: ', subData);
         try{
             const options = {
                 token:{
                     key:process.env.IOS_KEY,
                     keyId:process.env.IOS_KEY_ID,
                     teamID:process.env.IOS_TEAM
-                },
-                production:true
+                }
             }
 
             const provider=new iospush.Provider(token)
@@ -56,11 +54,13 @@ const push=async (id,configs)=>{
                 topic: process.env.IOS_BUNDLE_ID,
                 pushType:'alert'
             })
+            console.log('provider')
+            console.log(notification);
             const res = await provider.send(notification,subData)
 
             provider.shutdown()
         }catch(err){
-            console.error(err)
+            console.error({...err})
         }
 
     }
