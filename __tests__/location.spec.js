@@ -16,9 +16,9 @@ describe("Locations", () => {
     expect(response.status).toEqual(200)
   })
 
-  it("will return a 500 error if the user does not exist", async () => {
+  it("will return a 404 error if the user does not exist", async () => {
     const response = await request(server).get("/9999999")
-    expect(response).toEqual(500)
+    expect(response.status).toEqual(404)
   })
 
 
