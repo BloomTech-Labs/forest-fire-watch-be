@@ -65,5 +65,18 @@ describe('/api/auth/register', () => {
     expect(JSON.parse(response.text)["message"]).toBe("Welcome username123!")
   })
 
+  it("Should return a 400 code if user does not exist", async () => {
+    let response = await request(server)
+      .post("/api/auth/login")
+      .send({username: "DoesNotExist", password: "123456"})
+    expect(response.status).toBe(400)
+  })
+
+  it("Should return a message saying 'user does not exist' ", async () => {
+    let response = await request(server)
+      .post("/api/auth/login")
+      .send({username: "DoesNotExist", password: "123456"})
+    expect(JSON.parse(response.text)["username"]).toBe("That username does not exist")
+  })
 })
 
