@@ -58,7 +58,7 @@ const push=async (id,configs)=>{
             // console.log('response', res);
             provider.shutdown()
         }catch(err){
-            console.error('Error',{...err})
+            console.error('Error',err)
         }
 
     }
