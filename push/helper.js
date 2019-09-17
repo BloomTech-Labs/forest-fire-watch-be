@@ -43,23 +43,19 @@ const push=async (id,configs)=>{
                 },
                 production:true
             }
-            console.log('options',options)
             
             const provider=new iospush.Provider(options)
 
-            let notification = new iospush.Notification({
-                alert:{
-                    body:configs.body,
-                    title:configs.title
-                },
-                expiry: Math.floor(Date.now()/1000)+3600, //1 hour
-                topic: process.env.IOS_BUNDLE_ID,
-                pushType:'alert'
-            })
+            let notification = new iospush.Notification()
+
+            notification.expiry=Math.floor(Date.now()/1000)+3600, //1 hour
+            notification.alert=configs.body
+            notification.topic=process.env.IOS_BUNDLE_ID
+
             console.log('provider',notification)
 
             const res = await provider.send(notification,subData)
-
+            console.log('response', res);
             provider.shutdown()
         }catch(err){
             console.error({...err})
