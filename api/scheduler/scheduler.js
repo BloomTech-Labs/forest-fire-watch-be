@@ -57,15 +57,23 @@ cron.schedule("10,20,30,40,59 * * * * *", async function() {
   //    - loop through the array to get each locations user information.
 
   alertLocations.forEach(async alertLoc => {
-    if (alertLoc.receive_sms && alertLoc.notification_timer === 0) {
-      alertMessage();
-      
-    }
-    // console.log(alertLoc.notification_timer)
-    if (alertLoc.notification_timer === 12) {
-      await Locations.update(alertLoc.id, {notification_timer: 0})
-    } else {
-    await Locations.update(alertLoc.id, {notification_timer: alertLoc.notification_timer + 1})
+    console.log(alertLoc);
+    if (alertLoc.receive_sms && alertLoc.cell_number) {
+      if (alertLoc.notification_timer === 0) {
+        console.log("sent text");
+        const phone = alertLoc.cell_number;
+        const address = alertLoc.address;
+        const radius = alertLoc.radius;
+        alertMessage(phone, address, radius);
+      }
+
+      if (alertLoc.notification_timer === 12) {
+        await Locations.update(alertLoc.id, { notification_timer: 0 });
+      } else {
+        await Locations.update(alertLoc.id, {
+          notification_timer: alertLoc.notification_timer + 1
+        });
+      }
     }
   });
 

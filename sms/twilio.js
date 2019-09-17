@@ -8,12 +8,12 @@ module.exports = {
   alertMessage
 };
 
-function alertMessage(body, to) {
+function alertMessage(phone, address, radius) {
   client.messages
     .create({
-      body: "TESTING",
-      to: "+15628330376", // Text this number 1(234)567-8910
-      from: "+14243961692" // Ken's test account
+      body: `There are active wildfires within ${radius} miles of ${address}`,
+      to: `+1${phone}`, // +1(123)456-1234
+      from: "+15182415071"
     })
     .then(message => console.log(message.sid))
     .catch(err => console.log(err));

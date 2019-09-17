@@ -27,7 +27,7 @@ function findAll() {
       "locations.notification_timer",
       "users.cell_number",
       "users.receive_sms",
-      "users.receive_push",
+      "users.receive_push"
     );
 }
 
@@ -44,7 +44,7 @@ async function add(location) {
 function findById(id) {
   return db("locations")
     .where({ id })
-    .last();
+    .first();
 }
 
 function remove(id) {
