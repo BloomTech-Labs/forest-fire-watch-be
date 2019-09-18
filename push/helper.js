@@ -1,6 +1,7 @@
 const webpush = require('web-push')
 const apn = require('apn')
 
+
 const privateVapid=process.env.VAPID_PRIVATE;
 const publicVapid=process.env.VAPID_PUBLIC;
 const Notifications = require('../models/push-notifications/notifications-model.js')
@@ -37,7 +38,7 @@ const push=async (id,configs)=>{
         try{
             const options = {
                 token:{
-                    key:process.env.IOS_KEY,
+                    key:Buffer.from(process.env.IOS_KEY),
                     keyId:process.env.IOS_KEY_ID,
                     teamId:process.env.IOS_TEAM
                 },
