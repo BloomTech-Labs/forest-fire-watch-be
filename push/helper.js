@@ -47,10 +47,13 @@ const push=async (id,configs)=>{
             const provider=new apn.Provider(options)
             let notification = await new apn.Notification()
             notification.expiry=Math.floor(Date.now()/1000)+3600 //1 hour
-            notification.alert=configs.body
+            notification.alert=configs.title
+            notification.payload=configs.body
             notification.topic=process.env.IOS_BUNDLE_ID
 
             console.log(subData);
+
+            console.log(notification);
 
             const res = await provider.send(notification,subData.trim())
             if(res.failed.length>0){
@@ -58,7 +61,6 @@ const push=async (id,configs)=>{
                     console.error("failed object:",element.response);
                 });
             }
-            console.log(res);
             provider.shutdown()
         }catch(err){
             console.error('Error',err)
