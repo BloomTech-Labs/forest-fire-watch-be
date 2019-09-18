@@ -52,7 +52,7 @@ const push=async (id,configs)=>{
 
             console.log(subData);
 
-            const res = await provider.send(notification,subData)
+            const res = await provider.send(notification,subData.trim())
             if(res.failed.length>0){
                 res.failed.forEach(element => {
                     console.error("failed object:",element.response);
