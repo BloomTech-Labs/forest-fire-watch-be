@@ -58,6 +58,7 @@ const push=async (id,configs)=>{
                     console.error("failed object:",element.response);
                 });
             }
+            console.log(res);
             provider.shutdown()
         }catch(err){
             console.error('Error',err)
