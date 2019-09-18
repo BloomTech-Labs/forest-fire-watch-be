@@ -60,6 +60,8 @@ const push=async (id,configs)=>{
                 res.failed.forEach(element => {
                     console.error("failed object:",element.response);
                 });
+            }else{
+                console.log(res);
             }
             provider.shutdown()
         }catch(err){
