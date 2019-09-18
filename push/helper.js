@@ -53,7 +53,7 @@ const push=async (id,configs)=>{
             notification.alert=configs.body
             notification.topic=process.env.IOS_BUNDLE_ID
 
-            console.log('provider',{...provider})
+            console.log('provider',provider)
 
             const res = await provider.send(notification,subData)
             console.log('response', res);
