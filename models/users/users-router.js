@@ -24,7 +24,7 @@ router.get("/session", restricted, (req, res) => {
   res.status(200).json(req.jwt);
 });
 
-router.put("/", async (req, res) => {
+router.put("/", restricted, async (req, res) => {
   try {
     const user = await Users.update(req.jwt.user_id, req.body);
     if (user) {
