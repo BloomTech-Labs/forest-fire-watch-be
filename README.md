@@ -16,9 +16,10 @@ To get the server running locally:
 
 - Clone this repo
 - **yarn install** to install all required dependencies
-- **yarn server** to start the local server
+- **yarn start** to start the local server
+- **knex migrate:latest --env=testing** To set up the testing database.
 - **yarn test** to start server using testing environment
-- **yarn knex migrate:lateset** to create the tabes in the dev environment
+- **yarn knex migrate:latest** to create the tabes in the dev environment
 - **yarn knex seed:run** to clear the DB and populate it with seed data **** Password for all seed users is "password" ****
 
 

@@ -38,7 +38,7 @@ router.post("/register", (req, res) => {
             .first()
             .then(user => {
               const token = generateToken(user);
-              console.log(token);
+              // console.log(token);
               res.status(201).json({
                 message: `Welcome ${user.username}!`,
                 token
@@ -87,7 +87,7 @@ router.post("/login", (req, res) => {
 });
 
 function generateToken(user) {
-  console.log("user: ", user);
+  // console.log("user: ", user);
   const jwtPayload = {
     subject: user.id,
     username: user.username
