@@ -56,7 +56,7 @@ const push=async (id,configs)=>{
             console.log('provider',{...provider})
 
             const res = await provider.send(notification,subData)
-            // console.log('response', res);
+            console.log('response', res);
             provider.shutdown()
         }catch(err){
             console.error('Error',err)
