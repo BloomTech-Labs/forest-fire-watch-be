@@ -35,7 +35,6 @@ const push=async (id,configs)=>{
         }
     }else{
         try{
-            console.log('ios key:', process.env.IOS_KEY)
             const options = {
                 token:{
                     key:Buffer.from(process.env.IOS_KEY),
@@ -53,10 +52,11 @@ const push=async (id,configs)=>{
             notification.alert=configs.body
             notification.topic=process.env.IOS_BUNDLE_ID
 
-            console.log('provider',provider)
-
             const res = await provider.send(notification,subData)
             console.log('response', res);
+            if(res.status==400){
+                console.error("Failed:", {...res.response});
+            }
             provider.shutdown()
         }catch(err){
             console.error('Error',err)
