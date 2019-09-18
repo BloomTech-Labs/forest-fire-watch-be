@@ -50,6 +50,7 @@ const push=async (id,configs)=>{
             notification.title=configs.title
             notification.body=configs.body
             notification.topic=process.env.IOS_BUNDLE_ID
+            notification.pushType='alert'
 
             console.log(subData);
 
