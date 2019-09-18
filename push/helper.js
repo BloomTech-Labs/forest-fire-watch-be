@@ -51,8 +51,9 @@ const push=async (id,configs)=>{
             notification.body=configs.body
             notification.topic=process.env.IOS_BUNDLE_ID
             notification.pushType='alert'
+            notification.sound="ping.aiff"
+            notification.badge=1
 
-            console.log(subData);
 
             console.log(notification);
 
