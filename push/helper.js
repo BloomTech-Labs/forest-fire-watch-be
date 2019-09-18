@@ -41,7 +41,7 @@ const push=async (id,configs)=>{
                     keyId:process.env.IOS_KEY_ID,
                     teamId:process.env.IOS_TEAM
                 },
-                production:true
+                production:false
             }
             
             const provider=new apn.Provider(options)
