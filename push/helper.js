@@ -53,9 +53,10 @@ const push=async (id,configs)=>{
             notification.topic=process.env.IOS_BUNDLE_ID
 
             const res = await provider.send(notification,subData)
-            console.log('response', ...res.response);
-            if(res.status=='400'){
-                console.error("Failed:", res.response);
+            if(res.failed.length>0){
+                res.failed.forEach(element => {
+                    console.error("failed object:",element.response);
+                });
             }
             provider.shutdown()
         }catch(err){
