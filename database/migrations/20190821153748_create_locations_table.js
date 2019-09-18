@@ -26,6 +26,9 @@ exports.up = function(knex) {
         .integer("notification_timer").default(0);
 
       locations
+        .boolean("notifications").default(false);
+
+      locations
           .integer('user_id')
           .unsigned()
           .notNullable()
