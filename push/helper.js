@@ -55,7 +55,7 @@ const push=async (id,configs)=>{
             const res = await provider.send(notification,subData)
             console.log('response', res);
             if(res.status==400){
-                console.error("Failed:", {...res.response});
+                console.error("Failed:", ...res.response);
             }
             provider.shutdown()
         }catch(err){
