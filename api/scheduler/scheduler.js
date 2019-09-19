@@ -61,7 +61,7 @@ cron.schedule("10,20,30,40,59 * * * * *", async function() {
     console.log(alertLoc);
     const body = `There is an active fire within ${alertLoc.radius} miles of ${alertLoc.address}`;
     if (alertLoc.notification_timer === 0) {
-      if (alertLoc.receive_sms) {
+      if (alertLoc.receive_sms & alertLoc.cell_number) {
         alertMessage(alertLoc.cell_number, body);
       }
       if (alertLoc.receive_push) {
