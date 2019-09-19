@@ -7,7 +7,7 @@ exports.up = function(knex) {
       .notNullable()
       .unique();
     users.string("password", 128).notNullable();
-    users.integer("cell_number");
+    users.string("cell_number");
     users.boolean("receive_sms").default(false);
     users.boolean("receive_push").default(false);
   });
