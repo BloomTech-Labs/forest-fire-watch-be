@@ -64,12 +64,12 @@ cron.schedule("10,20,30,40,59 * * * * *", async function() {
       if (alertLoc.receive_sms & alertLoc.cell_number) {
         alertMessage(alertLoc.cell_number, body);
       }
-      if (alertLoc.receive_push) {
-        push(alertLoc.user_id, {
-          title: "Wildfire Notification",
-          body: body
-        });
-      }
+      // if (alertLoc.receive_push) {
+      //   push(alertLoc.user_id, {
+      //     title: "Wildfire Notification",
+      //     body: body
+      //   });
+      // }
     }
     // console.log(alertLoc.notification_timer)
     if (alertLoc.notification_timer === 12) {
