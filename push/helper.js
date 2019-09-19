@@ -15,7 +15,7 @@ webpush.setVapidDetails('mailto:fireflightapp@gmail.com',publicVapid,privateVapi
  */
 const push=async (id,configs)=>{
     let subscriptions = await Notifications.findBy({user_id:id})
-    subscriptions.forEach(subscription=>{
+    subscriptions.forEach(async subscription=>{
         subscription=subscriptions.pop()
         let subData
         if(subscription.type=='web')
