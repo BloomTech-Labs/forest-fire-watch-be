@@ -14,8 +14,10 @@ webpush.setVapidDetails('mailto:fireflightapp@gmail.com',publicVapid,privateVapi
  * @param {object} configs title: main title to display, body: body to display
  */
 const push=async (id,configs)=>{
+    console.log(id);
     let subscriptions = await Notifications.findBy({user_id:id})
     subscriptions.forEach(async subscription=>{
+        console.log('subscription',subscription)
         subscription=subscriptions.pop()
         let subData
         if(subscription.type=='web')
@@ -24,12 +26,11 @@ const push=async (id,configs)=>{
             subData=subscription.subscription
         if(subscription.type=='web'){
             try {
-                console.log('here');
                 const payload=JSON.stringify(configs);
             
                 webpush.sendNotification(subData,payload)
                     .catch(err=>{
-                        console.error(err.stack);
+                        console.error('error', err);
                     })
             } catch (err) {
                 console.error("Error processing Push: ",err.message);
