@@ -54,7 +54,6 @@ const push=async (id,configs)=>{
             notification.sound="ping.aiff"
             notification.badge=1
 
-
             console.log(notification);
 
             const res = await provider.send(notification,subData.trim())
@@ -62,8 +61,10 @@ const push=async (id,configs)=>{
                 res.failed.forEach(element => {
                     console.error("failed object:",element.response);
                 });
+
             }else{
                 console.log(res);
+
             }
             provider.shutdown()
         }catch(err){

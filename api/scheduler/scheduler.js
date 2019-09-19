@@ -2,6 +2,7 @@ const cron = require("node-cron");
 const Locations = require("../../models/locations/locations-model");
 const Users = require("../../models/users/users-model");
 const { alertMessage } = require("../../sms/twilio");
+const push = require("../../push/helper");
 
 const scheduler_functions = require("./scheduler_functions");
 
@@ -57,15 +58,26 @@ cron.schedule("10,20,30,40,59 * * * * *", async function() {
   //    - loop through the array to get each locations user information.
 
   alertLocations.forEach(async alertLoc => {
-    if (alertLoc.receive_sms && alertLoc.notification_timer === 0) {
-      alertMessage();
-      
+    console.log(alertLoc);
+    const body = `There is an active fire within ${alertLoc.radius} miles of ${alertLoc.address}`;
+    if (alertLoc.notification_timer === 0) {
+      if (alertLoc.receive_sms & alertLoc.cell_number) {
+        alertMessage(alertLoc.cell_number, body);
+      }
+      if (alertLoc.receive_push) {
+        push(alertLoc.user_id, {
+          title: "Wildfire Notification",
+          body: body
+        });
+      }
     }
     // console.log(alertLoc.notification_timer)
     if (alertLoc.notification_timer === 12) {
-      await Locations.update(alertLoc.id, {notification_timer: 0})
+      await Locations.update(alertLoc.id, { notification_timer: 0 });
     } else {
-    await Locations.update(alertLoc.id, {notification_timer: alertLoc.notification_timer + 1})
+      await Locations.update(alertLoc.id, {
+        notification_timer: alertLoc.notification_timer + 1
+      });
     }
   });
 
