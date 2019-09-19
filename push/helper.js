@@ -50,8 +50,9 @@ const push=async (id,configs)=>{
             notification.title=configs.title
             notification.body=configs.body
             notification.topic=process.env.IOS_BUNDLE_ID
-
-            console.log(subData);
+            notification.pushType='alert'
+            notification.sound="ping.aiff"
+            notification.badge=1
 
             console.log(notification);
 
@@ -60,6 +61,10 @@ const push=async (id,configs)=>{
                 res.failed.forEach(element => {
                     console.error("failed object:",element.response);
                 });
+
+            }else{
+                console.log(res);
+
             }
             provider.shutdown()
         }catch(err){
