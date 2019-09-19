@@ -8,12 +8,12 @@ module.exports = {
   alertMessage
 };
 
-function alertMessage(to, body) {
+function alertMessage(body, to) {
   client.messages
     .create({
-      body: `FireFlight Wildfire Notification: ${body}`,
-      to: `+1${to}`,
-      from: "+15182415071"
+      body: "TESTING",
+      to: "+15628330376", // Text this number 1(234)567-8910
+      from: "+14243961692" // Ken's test account
     })
     .then(message => console.log(message.sid))
     .catch(err => console.log(err));
