@@ -2,6 +2,7 @@ const cron = require("node-cron");
 const Locations = require("../../models/locations/locations-model");
 const Users = require("../../models/users/users-model");
 const { alertMessage } = require("../../sms/twilio");
+const push = require("../../push/helper");
 
 const scheduler_functions = require("./scheduler_functions");
 
@@ -58,6 +59,7 @@ cron.schedule("10,20,30,40,59 * * * * *", async function() {
 
   alertLocations.forEach(async alertLoc => {
     console.log(alertLoc);
+<<<<<<< HEAD
     if (alertLoc.receive_sms && alertLoc.cell_number) {
       if (alertLoc.notification_timer === 0) {
         console.log("sent text");
@@ -74,6 +76,27 @@ cron.schedule("10,20,30,40,59 * * * * *", async function() {
           notification_timer: alertLoc.notification_timer + 1
         });
       }
+=======
+    const body = `There is an active fire within ${alertLoc.radius} miles of ${alertLoc.address}`;
+    if (alertLoc.notification_timer === 0) {
+      if (alertLoc.receive_sms & alertLoc.cell_number) {
+        alertMessage(alertLoc.cell_number, body);
+      }
+      if (alertLoc.receive_push) {
+        push(alertLoc.user_id, {
+          title: "Wildfire Notification",
+          body: body
+        });
+      }
+    }
+    // console.log(alertLoc.notification_timer)
+    if (alertLoc.notification_timer === 12) {
+      await Locations.update(alertLoc.id, { notification_timer: 0 });
+    } else {
+      await Locations.update(alertLoc.id, {
+        notification_timer: alertLoc.notification_timer + 1
+      });
+>>>>>>> 6f9720771b53c7c471764dc29c7f8083ed427606
     }
   });
 

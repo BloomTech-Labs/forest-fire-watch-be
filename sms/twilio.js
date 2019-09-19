@@ -8,11 +8,11 @@ module.exports = {
   alertMessage
 };
 
-function alertMessage(phone, address, radius) {
+function alertMessage(to, body) {
   client.messages
     .create({
-      body: `There are active wildfires within ${radius} miles of ${address}`,
-      to: `+1${phone}`, // +1(123)456-1234
+      body: `FireFlight Wildfire Notification: ${body}`,
+      to: `+1${to}`,
       from: "+15182415071"
     })
     .then(message => console.log(message.sid))

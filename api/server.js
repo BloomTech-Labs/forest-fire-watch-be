@@ -17,6 +17,8 @@ server.use(cors());
 
 // scheduler;
 
+console.log();
+
 server.use("/api/auth", authRouter);
 server.use("/api/users", usersRouter);
 server.use("/api/locations", locationsRouter);

@@ -1,5 +1,6 @@
 const webpush = require('web-push')
-const iospush = require('apn')
+const apn = require('apn')
+
 
 const privateVapid=process.env.VAPID_PRIVATE;
 const publicVapid=process.env.VAPID_PUBLIC;
@@ -20,8 +21,7 @@ const push=async (id,configs)=>{
         subData=JSON.parse(subscription.subscription)
     else
         subData=subscription.subscription
-    
-    if(typeof(subData)!=="string"){
+    if(subscription.type=='web'){
         try {
             console.log('here');
             const payload=JSON.stringify(configs);
@@ -37,31 +37,38 @@ const push=async (id,configs)=>{
         try{
             const options = {
                 token:{
-                    key:process.env.IOS_KEY,
+                    key:Buffer.from(process.env.IOS_KEY),
                     keyId:process.env.IOS_KEY_ID,
-                    teamID:process.env.IOS_TEAM
+                    teamId:process.env.IOS_TEAM
                 },
-                production:true
+                production:false
             }
+            
+            const provider=new apn.Provider(options)
+            let notification = await new apn.Notification()
+            notification.expiry=Math.floor(Date.now()/1000)+3600 //1 hour
+            notification.title=configs.title
+            notification.body=configs.body
+            notification.topic=process.env.IOS_BUNDLE_ID
+            notification.pushType='alert'
+            notification.sound="ping.aiff"
+            notification.badge=1
 
-            const provider=new iospush.Provider(options)
-
-            let notification = new iospush.Notification({
-                alert:{
-                    body:configs.body,
-                    title:configs.title
-                },
-                expiry: Math.floor(Date.now()/1000)+3600, //1 hour
-                topic: process.env.IOS_BUNDLE_ID,
-                pushType:'alert'
-            })
-            console.log('provider')
             console.log(notification);
-            const res = await provider.send(notification,subData)
 
+            const res = await provider.send(notification,subData.trim())
+            if(res.failed.length>0){
+                res.failed.forEach(element => {
+                    console.error("failed object:",element.response);
+                });
+
+            }else{
+                console.log(res);
+
+            }
             provider.shutdown()
         }catch(err){
-            console.error({...err})
+            console.error('Error',err)
         }
 
     }
