@@ -21,7 +21,6 @@ const push=async (id,configs)=>{
         subData=JSON.parse(subscription.subscription)
     else
         subData=subscription.subscription
-    console.log('initial', subscription)
     if(subscription.type=='web'){
         try {
             console.log('here');
@@ -42,21 +41,26 @@ const push=async (id,configs)=>{
                     keyId:process.env.IOS_KEY_ID,
                     teamId:process.env.IOS_TEAM
                 },
-                production:true
+                production:false
             }
             
             const provider=new apn.Provider(options)
-            console.log(provider);
             let notification = await new apn.Notification()
-            console.log(notification)
             notification.expiry=Math.floor(Date.now()/1000)+3600 //1 hour
-            notification.alert=configs.body
+            notification.title=configs.title
+            notification.body=configs.body
             notification.topic=process.env.IOS_BUNDLE_ID
 
-            console.log('provider',{...provider})
+            console.log(subData);
 
-            const res = await provider.send(notification,subData)
-            // console.log('response', res);
+            console.log(notification);
+
+            const res = await provider.send(notification,subData.trim())
+            if(res.failed.length>0){
+                res.failed.forEach(element => {
+                    console.error("failed object:",element.response);
+                });
+            }
             provider.shutdown()
         }catch(err){
             console.error('Error',err)
