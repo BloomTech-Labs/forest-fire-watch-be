@@ -27,7 +27,7 @@ function findAll() {
       "locations.notification_timer",
       "users.cell_number",
       "users.receive_sms",
-      "users.receive_push",
+      "users.receive_push"
     );
 }
 
