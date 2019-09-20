@@ -17,52 +17,60 @@ webpush.setVapidDetails(
  * @param {object} configs title: main title to display, body: body to display
  */
 const push = async (id, configs) => {
-  let subscription = await Notifications.findBy({ user_id: id });
-  subscription = subscription.pop();
-  let subData;
-  if (subscription.type == "web")
-    subData = JSON.parse(subscription.subscription);
-  else subData = subscription.subscription;
-  console.log("initial", subscription);
-  if (subscription.type == "web") {
-    try {
-      console.log("here");
-      const payload = JSON.stringify(configs);
+  console.log(id);
+  let subscriptions = await Notifications.findBy({ user_id: id });
+  subscriptions.forEach(async subscription => {
+    console.log("subscription", subscription);
+    subscription = subscriptions.pop();
+    let subData;
+    if (subscription.type == "web")
+      subData = JSON.parse(subscription.subscription);
+    else subData = subscription.subscription;
+    if (subscription.type == "web") {
+      try {
+        const payload = JSON.stringify(configs);
 
-      webpush.sendNotification(subData, payload).catch(err => {
-        console.error(err.stack);
-      });
-    } catch (err) {
-      console.error("Error processing Push: ", err.message);
+        webpush.sendNotification(subData, payload).catch(err => {
+          console.error("error", err);
+        });
+      } catch (err) {
+        console.error("Error processing Push: ", err.message);
+      }
+    } else {
+      try {
+        const options = {
+          token: {
+            key: Buffer.from(process.env.IOS_KEY),
+            keyId: process.env.IOS_KEY_ID,
+            teamId: process.env.IOS_TEAM
+          },
+          production: false
+        };
+
+        const provider = new apn.Provider(options);
+        let notification = await new apn.Notification();
+        notification.expiry = Math.floor(Date.now() / 1000) + 3600; //1 hour
+        notification.title = configs.title;
+        notification.body = configs.body;
+        notification.topic = process.env.IOS_BUNDLE_ID;
+        notification.pushType = "alert";
+        notification.sound = "ping.aiff";
+        notification.badge = 1;
+
+        const res = await provider.send(notification, subData.trim());
+        if (res.failed.length > 0) {
+          res.failed.forEach(element => {
+            console.error("failed object:", element.response);
+          });
+        } else {
+          console.log(res);
+        }
+        provider.shutdown();
+      } catch (err) {
+        console.error("Error", err);
+      }
     }
-  } else {
-    try {
-      const options = {
-        token: {
-          key: Buffer.from(process.env.IOS_KEY),
-          keyId: process.env.IOS_KEY_ID,
-          teamId: process.env.IOS_TEAM
-        },
-        production: true
-      };
-
-      const provider = new apn.Provider(options);
-      console.log(provider);
-      let notification = await new apn.Notification();
-      console.log(notification);
-      notification.expiry = Math.floor(Date.now() / 1000) + 3600; //1 hour
-      notification.alert = configs.body;
-      notification.topic = process.env.IOS_BUNDLE_ID;
-
-      console.log("provider", { ...provider });
-
-      const res = await provider.send(notification, subData);
-      // console.log('response', res);
-      provider.shutdown();
-    } catch (err) {
-      console.error("Error", err);
-    }
-  }
+  });
 };
 
 module.exports = push;
