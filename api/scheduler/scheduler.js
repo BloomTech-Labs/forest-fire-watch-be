@@ -61,15 +61,15 @@ cron.schedule("10,20,30,40,59 * * * * *", async function() {
     console.log(alertLoc);
     const body = `There is an active fire within ${alertLoc.radius} miles of ${alertLoc.address}`;
     if (alertLoc.notification_timer === 0) {
-      if (alertLoc.receive_sms & alertLoc.cell_number) {
+      if (alertLoc.receive_sms) {
         alertMessage(alertLoc.cell_number, body);
       }
-      // if (alertLoc.receive_push) {
-      //   push(alertLoc.user_id, {
-      //     title: "Wildfire Notification",
-      //     body: body
-      //   });
-      // }
+      if (alertLoc.receive_push) {
+        push(alertLoc.user_id, {
+          title: "Wildfire Notification",
+          body: body
+        });
+      }
     }
     // console.log(alertLoc.notification_timer)
     if (alertLoc.notification_timer === 12) {

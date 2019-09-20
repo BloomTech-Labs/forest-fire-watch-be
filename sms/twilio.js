@@ -8,7 +8,7 @@ module.exports = {
   alertMessage
 };
 
-function alertMessage(body, to) {
+function alertMessage(to, body) {
   client.messages
     .create({
       body: body,
