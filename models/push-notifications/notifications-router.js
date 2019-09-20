@@ -4,9 +4,9 @@ const restricted = require("../../auth/restricted-middleware.js");
 const pusher = require("../../push/helper.js");
 
 router.post("/register", restricted, async (req, res) => {
+  console.error("here");
   try {
     const subscription = req.body;
-    console.log(subscription);
     let sub = JSON.stringify(subscription);
     let userSub = await Notifications.add({
       subscription: sub,
@@ -45,15 +45,15 @@ router.post("/saveios", restricted, async (req, res) => {
 
     if (userSub) res.status(201).json({});
     else res.status(400).json({ message: "information not saved properly" });
-
-    pusher(req.jwt.user_id, {
-      title: "Saved",
-      body:
-        "You will now recieve Fire Data based on your location when it is an emergency"
-    });
   } catch (err) {
     console.error("error :", err.message);
   }
+
+  pusher(req.jwt.user_id, {
+    title: "Saved",
+    body:
+      "You will now recieve Fire Data based on your location when it is an emergency"
+  });
 });
 
 module.exports = router;

@@ -16,8 +16,9 @@ webpush.setVapidDetails(
  * @param {string}   id id of user
  * @param {object} configs title: main title to display, body: body to display
  */
+
 const push = async (id, configs) => {
-  console.log(id);
+  console.log("helper", id);
   let subscriptions = await Notifications.findBy({ user_id: id });
   subscriptions.forEach(async subscription => {
     console.log("subscription", subscription);
@@ -44,7 +45,7 @@ const push = async (id, configs) => {
             keyId: process.env.IOS_KEY_ID,
             teamId: process.env.IOS_TEAM
           },
-          production: false
+          production: true
         };
 
         const provider = new apn.Provider(options);
@@ -70,6 +71,7 @@ const push = async (id, configs) => {
         console.error("Error", err);
       }
     }
+    provider.shutdown();
   });
 };
 
