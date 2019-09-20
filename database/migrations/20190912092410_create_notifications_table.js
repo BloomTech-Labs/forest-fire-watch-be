@@ -13,7 +13,7 @@ exports.up = function(knex) {
             .onUpdate('CASCADE'); // what happens if the id of the user changes
         
         notifications
-            .string('subscription')
+            .text('subscription')
             .notNullable();
         
         notifications
