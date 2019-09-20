@@ -4,11 +4,9 @@ const restricted = require('../../auth/restricted-middleware.js');
 const pusher = require('../../push/helper.js')
 
 router.post('/register',restricted, async (req,res)=>{
-    console.error('here')
     try {
         const subscription=req.body
         let sub = JSON.stringify(subscription)
-        console.log({subscription:sub, type:'web',user_id:req.jwt.user_id});
         let userSub = await Notifications.add({subscription:sub, type:'web',user_id:req.jwt.user_id})
         if(userSub)
             res.status(201).json({});
