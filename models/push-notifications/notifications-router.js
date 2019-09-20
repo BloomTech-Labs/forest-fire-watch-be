@@ -3,7 +3,8 @@ const Notifications=require('./notifications-model.js');
 const restricted = require('../../auth/restricted-middleware.js');
 const pusher = require('../../push/helper.js')
 
-router.post('/register',restricted,async (req,res)=>{
+router.post('/register',restricted, async (req,res)=>{
+    console.error('here')
     try {
         const subscription=req.body
         let sub = JSON.stringify(subscription)
