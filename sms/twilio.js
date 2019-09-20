@@ -11,7 +11,7 @@ module.exports = {
 function alertMessage(to, body) {
   client.messages
     .create({
-      body: `FireFlight Wildfire Notification: ${body}`,
+      body: body,
       to: `+1${to}`,
       from: "+15182415071"
     })
