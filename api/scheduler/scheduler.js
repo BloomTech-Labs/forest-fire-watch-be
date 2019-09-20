@@ -10,78 +10,57 @@ const scheduler_functions = require("./scheduler_functions");
 
 // Add new geocoding into the add location api call.
 
-cron.schedule("10,20,30,40,59 * * * * *", async function() {
-  console.log("running a task every minute");
+cron.schedule(
+  "* * 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,23 * * *",
+  async function() {
+    console.log("Running Cron Scheduler");
 
-  // Step 1: Get all the fires in the USA.
+    let USAfires = await scheduler_functions.getAmericaFires();
 
-  let USAfires = await scheduler_functions.getAmericaFires();
+    const locations = await Locations.findAll();
 
-  // console.log(USAfires);
-  //  - Store in an array.
+    let alertLocations = [];
+    locations.forEach(location => {
+      if (location.latitude && location.longitude) {
+        USAfires.forEach(fire => {
+          let distance = scheduler_functions.haversineDistance(
+            [location.latitude, location.longitude],
+            [fire[1], fire[0]],
+            true
+          );
 
-  // Step 2: loop through locations
-  const locations = await Locations.findAll();
-  // console.log(locations);
-  // console.log(
-  //   scheduler_functions.haversineDistance(
-  //     [33.8947204, -117.292743],
-  //     [33.901772799999996, -118.1220864],
-  //     true
-  //   )
-  // );
-
-  let alertLocations = [];
-  locations.forEach(location => {
-    if (location.latitude && location.longitude) {
-      // console.log(location);
-      USAfires.forEach(fire => {
-        let distance = scheduler_functions.haversineDistance(
-          [location.latitude, location.longitude],
-          [fire[1], fire[0]],
-          true
-        );
-
-        if (distance <= location.radius) {
-          alertLocations.push(location);
-        }
-      });
-    }
-  });
-
-  alertLocations = new Set(alertLocations);
-  // console.log(alertLocations);
-
-  // Step 3: compare each location to the array of fire data
-  // Step 4: determine if location has fire data True / False
-  // Step 5: if true push the location name and user id into a separate array
-  //    - loop through the array to get each locations user information.
-
-  alertLocations.forEach(async alertLoc => {
-    console.log(alertLoc);
-    const body = `There is an active fire within ${alertLoc.radius} miles of ${alertLoc.address}`;
-    if (alertLoc.notification_timer === 0) {
-      if (alertLoc.receive_sms) {
-        alertMessage(alertLoc.cell_number, body);
-      }
-      if (alertLoc.receive_push) {
-        push(alertLoc.user_id, {
-          title: "Wildfire Notification",
-          body: body
+          if (distance <= location.radius) {
+            alertLocations.push(location);
+          }
         });
       }
-    }
-    // console.log(alertLoc.notification_timer)
-    if (alertLoc.notification_timer === 12) {
-      await Locations.update(alertLoc.id, { notification_timer: 0 });
-    } else {
-      await Locations.update(alertLoc.id, {
-        notification_timer: alertLoc.notification_timer + 1
-      });
-    }
-  });
+    });
 
-  // Step 6: send alert via push notification / sms message if alert is true
-});
+    alertLocations = new Set(alertLocations);
+
+    alertLocations.forEach(async alertLoc => {
+      const body = `There is an active fire within ${alertLoc.radius} miles of ${alertLoc.address}`;
+      if (alertLoc.notification_timer === 0) {
+        if (alertLoc.receive_sms) {
+          alertMessage(alertLoc.cell_number, body);
+        }
+        if (alertLoc.receive_push) {
+          push(alertLoc.user_id, {
+            title: "Wildfire Notification",
+            body: body
+          });
+        }
+      }
+
+      if (alertLoc.notification_timer === 12) {
+        await Locations.update(alertLoc.id, { notification_timer: 0 });
+      } else {
+        await Locations.update(alertLoc.id, {
+          notification_timer: alertLoc.notification_timer + 1
+        });
+      }
+    });
+  }
+);
 
 module.exports = cron;
