@@ -20,6 +20,8 @@ webpush.setVapidDetails(
 const push = async (id, configs) => {
   console.log("helper", id);
   let subscriptions = await Notifications.findBy({ user_id: id });
+  let ios = false,
+    web = false;
   subscriptions.forEach(async subscription => {
     console.log("subscription", subscription);
     subscription = subscriptions.pop();
@@ -27,17 +29,20 @@ const push = async (id, configs) => {
     if (subscription.type == "web")
       subData = JSON.parse(subscription.subscription);
     else subData = subscription.subscription;
-    if (subscription.type == "web") {
+    if (subscription.type == "web" && !web) {
       try {
         const payload = JSON.stringify(configs);
+
+        console.log(subData);
 
         webpush.sendNotification(subData, payload).catch(err => {
           console.error("error", err);
         });
+        web = true;
       } catch (err) {
         console.error("Error processing Push: ", err.message);
       }
-    } else {
+    } else if (!ios) {
       try {
         const options = {
           token: {
@@ -64,7 +69,7 @@ const push = async (id, configs) => {
             console.error("failed object:", element.response);
           });
         } else {
-          console.log(res);
+          ios = true;
         }
         provider.shutdown();
       } catch (err) {

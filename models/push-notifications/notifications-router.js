@@ -8,6 +8,7 @@ router.post("/register", restricted, async (req, res) => {
   try {
     const subscription = req.body;
     let sub = JSON.stringify(subscription);
+    console.log({ subscription: sub, type: "web", user_id: req.jwt.user_id });
     let userSub = await Notifications.add({
       subscription: sub,
       type: "web",
@@ -23,7 +24,7 @@ router.post("/register", restricted, async (req, res) => {
         "Your subscription has been saved. You will now recieve Fire Data based on your location when it is an emergency"
     });
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
     res.status(500).json({
       message: "Server error while saving"
     });

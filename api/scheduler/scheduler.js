@@ -10,7 +10,7 @@ const scheduler_functions = require("./scheduler_functions");
 
 // Add new geocoding into the add location api call.
 
-cron.schedule("* * 5,17 * * *", async function() {
+cron.schedule("10,20,30,40,59 * * * * *", async function() {
   console.log("running a task every minute");
 
   // Step 1: Get all the fires in the USA.
@@ -65,7 +65,6 @@ cron.schedule("* * 5,17 * * *", async function() {
         alertMessage(alertLoc.cell_number, body);
       }
       if (alertLoc.receive_push) {
-        console.log("working");
         push(alertLoc.user_id, {
           title: "Wildfire Notification",
           body: body
