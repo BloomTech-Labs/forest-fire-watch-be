@@ -10,7 +10,7 @@ const scheduler_functions = require("./scheduler_functions");
 
 // Add new geocoding into the add location api call.
 
-cron.schedule("0,30 5-23 * * *", async function() {
+cron.schedule("30 * * * *", async function() {
   console.log("Running Cron Scheduler");
 
   let USAfires = await scheduler_functions.getAmericaFires();
