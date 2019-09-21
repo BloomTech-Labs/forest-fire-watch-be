@@ -99,27 +99,39 @@ To get the server running locally:
 
 🚫 This is an example, replace this with the actions that pertain to your backend
 
-`getOrgs()` -> Returns all organizations
+### Users
+`find()` -> Returns all users. *Not really used in this application*
 
-`getOrg(orgId)` -> Returns a single organization by ID
+`findBy(filter)` -> Returns a single user by the passed in filter.
 
-`addOrg(org)` -> Returns the created org
+`add(user)` -> Adds a new user. Returns the ID of the created user.
 
-`updateOrg(orgId)` -> Update an organization by ID
+`findById(id)` -> Returns the user with the matching ID.
 
-`deleteOrg(orgId)` -> Delete an organization by ID
+`remove(id)` -> Delete a user by ID. *Not used in this application*
+
+`update(id, changes)` -> Updates user based on passed in `changes`. Returns the user with the changes.
 <br>
 <br>
 <br>
-`getUsers(orgId)` -> if no param all users
 
-`getUser(userId)` -> Returns a single user by user ID
+### Locations
 
-`addUser(user object)` --> Creates a new user and returns that user. Also creates 7 availabilities defaulted to hours of operation for their organization.
+`find()` -> Returns locations filtered by ID and address.
 
-`updateUser(userId, changes object)` -> Updates a single user by ID.
+`findAll()` -> Returns Users, their IDs and their Locatations.
 
-`deleteUser(userId)` -> deletes everything dependent on the user
+`findBy(filter)` -> Returns locations based on the passed in filter.
+
+`add(location)` -> Adds a location. Returns the new location's ID.
+
+`findById(id)` -> Returns a location based on the passed in ID.
+
+`remove(id)` -> Removes locatoin based in the passed in ID Returns the number of locations deleted.
+
+`update(id, changes)` -> Updates the location based on the passed in ID. Returns the location with the changes.
+
+
 
 ##  Environment Variables
 
@@ -127,7 +139,6 @@ In order for the app to function correctly, the user must set up their own envir
 
 create a .env file that includes the following:
     
-    *  STAGING_DB - optional development db for using functionality not available in SQLite
     *  NODE_ENV - set to "development" until ready for "production"
     *  TWILIO_ID - This app uses twillio to send text messages. You can get your own keys by going to [Twillio.com](https://twilio.com)
     *  TWILIO_AUTH -  see above.
