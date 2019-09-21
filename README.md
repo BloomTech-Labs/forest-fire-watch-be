@@ -1,18 +1,11 @@
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
-
-🚫 The numbers 1️⃣ through 3️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
-
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
-
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
+####  Backend delpoyed at [🚫name service here](🚫add URL here) <br>
 
-## 1️⃣ Getting started
+## Getting started
 
 To get the server running locally:
 
-🚫 adjust these scripts to match your project
 
 - Clone this repo
 - **yarn install** to install all required dependencies
@@ -27,14 +20,12 @@ To get the server running locally:
 
 🚫 Why did you choose this framework?
 
--    Point One
--    Point Two
--    Point Three
--    Point Four
+-    We chose Express because it is fast an un-opinionated.  
+-    Knex is just simple to use. It has good documentation for both SQLite and Postgresql. 
+-    Axios is easy to use. It supports Promises. 
 
-## 2️⃣ Endpoints
+##  Endpoints
 
-🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
 
 #### Auth Routes
 
@@ -94,10 +85,16 @@ To get the server running locally:
   
 }
 ```
+#### Notifications
 
-## 2️⃣ Actions
+```
+{
+type: STRING
+subscriptions: TEXT
+}
+```
+## Actions
 
-🚫 This is an example, replace this with the actions that pertain to your backend
 
 ### Users
 `find()` -> Returns all users. *Not really used in this application*
@@ -131,7 +128,17 @@ To get the server running locally:
 
 `update(id, changes)` -> Updates the location based on the passed in ID. Returns the location with the changes.
 
+<br>
+<br>
+<br>
 
+
+### Push notifications
+`find()` -> returns all notifications filtered by ID and  subscriptions.
+
+`findBy(filter)` -> returns notifications based on the passed in filter.
+
+`findBy(filter)` -> returns notifications based on the passed in filter.
 
 ##  Environment Variables
 
