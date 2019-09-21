@@ -191,6 +191,8 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 ## Documentation
 
 See [Frontend Documentation](https://github.com/labs15-forest-fire/frontend) for details on the fronend of our project.
+
 See [iOS Documentation](https://github.com/labs15-forest-fire/iOS) for details on the mobile iOS version of our project.
+
 See [Data Science Documentation](https://github.com/labs15-forest-fire/Data-Science) for details on the data science behind our application.
 
