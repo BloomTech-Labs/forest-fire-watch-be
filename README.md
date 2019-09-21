@@ -1,6 +1,6 @@
 # API Documentation
 
-####  Backend delpoyed at [🚫name service here](🚫add URL here) <br>
+####  Backend delpoyed at [Heroku](🚫add URL here) <br>
 
 ## Getting started
 
@@ -16,9 +16,7 @@ To get the server running locally:
 - **yarn knex seed:run** to clear the DB and populate it with seed data **** Password for all seed users is "password" ****
 
 
-### Backend framework goes here
-
-🚫 Why did you choose this framework?
+### Backend framework
 
 -    We chose Express because it is fast an un-opinionated.  
 -    Knex is just simple to use. It has good documentation for both SQLite and Postgresql. 
@@ -145,7 +143,7 @@ subscriptions: TEXT
 In order for the app to function correctly, the user must set up their own environment variables.
 
 create a .env file that includes the following:
-    
+
     *  NODE_ENV - set to "development" until ready for "production"
     *  TWILIO_ID - This app uses twillio to send text messages. You can get your own keys by going to [Twillio.com](https://twilio.com)
     *  TWILIO_AUTH -  see above.
@@ -153,7 +151,7 @@ create a .env file that includes the following:
     *  VAPID_PUBLIC - see above
     *  GEO_CODE_KEY - To get your own Geocode keys go to [opencagedata](https://opencagedata.com/users/sign_up)
     *  JWT_SECRET - "Fireflight Secret"  This is a terrible secret. Also, we should use a third-party auth library.*
-    
+
 ## Contributing
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
@@ -192,5 +190,7 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
-🚫 Add DS iOS and/or Andriod links here if applicable.
+See [Frontend Documentation](https://github.com/labs15-forest-fire/frontend) for details on the fronend of our project.
+See [iOS Documentation](https://github.com/labs15-forest-fire/iOS) for details on the mobile iOS version of our project.
+See [Data Science Documentation](https://github.com/labs15-forest-fire/Data-Science) for details on the data science behind our application.
+
