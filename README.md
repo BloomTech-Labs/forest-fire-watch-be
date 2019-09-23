@@ -1,18 +1,11 @@
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
-
-🚫 The numbers 1️⃣ through 3️⃣ next to each item represent the week that part of the docs needs to be comepleted by.  Make sure to delete the numbers by the end of Labs.
-
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric.  Contributing to docs does NOT count as a PR to meet your weekly requirements.
-
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
+####  Backend delpoyed at [Heroku]("#") <br>
 
-## 1️⃣ Getting started
+## Getting started
 
 To get the server running locally:
 
-🚫 adjust these scripts to match your project
 
 - Clone this repo
 - **yarn install** to install all required dependencies
@@ -23,18 +16,14 @@ To get the server running locally:
 - **yarn knex seed:run** to clear the DB and populate it with seed data **** Password for all seed users is "password" ****
 
 
-### Backend framework goes here
+### Backend framework
 
-🚫 Why did you choose this framework?
+-    We chose Express because it is fast an un-opinionated.  
+-    Knex is just simple to use. It has good documentation for both SQLite and Postgresql. 
+-    Axios is easy to use. It supports Promises. 
 
--    Point One
--    Point Two
--    Point Three
--    Point Four
+##  Endpoints
 
-## 2️⃣ Endpoints
-
-🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
 
 #### Auth Routes
 
@@ -94,47 +83,75 @@ To get the server running locally:
   
 }
 ```
+#### Notifications
 
-## 2️⃣ Actions
+```
+{
+type: STRING
+subscriptions: TEXT
+}
+```
+## Actions
 
-🚫 This is an example, replace this with the actions that pertain to your backend
 
-`getOrgs()` -> Returns all organizations
+### Users
+`find()` -> Returns all users. *Not really used in this application*
 
-`getOrg(orgId)` -> Returns a single organization by ID
+`findBy(filter)` -> Returns a single user by the passed in filter.
 
-`addOrg(org)` -> Returns the created org
+`add(user)` -> Adds a new user. Returns the ID of the created user.
 
-`updateOrg(orgId)` -> Update an organization by ID
+`findById(id)` -> Returns the user with the matching ID.
 
-`deleteOrg(orgId)` -> Delete an organization by ID
+`remove(id)` -> Delete a user by ID. *Not used in this application*
+
+`update(id, changes)` -> Updates user based on passed in `changes`. Returns the user with the changes.
 <br>
 <br>
 <br>
-`getUsers(orgId)` -> if no param all users
 
-`getUser(userId)` -> Returns a single user by user ID
+### Locations
 
-`addUser(user object)` --> Creates a new user and returns that user. Also creates 7 availabilities defaulted to hours of operation for their organization.
+`find()` -> Returns locations filtered by ID and address.
 
-`updateUser(userId, changes object)` -> Updates a single user by ID.
+`findAll()` -> Returns Users, their IDs and their Locatations.
 
-`deleteUser(userId)` -> deletes everything dependent on the user
+`findBy(filter)` -> Returns locations based on the passed in filter.
 
-## 3️⃣ Environment Variables
+`add(location)` -> Adds a location. Returns the new location's ID.
+
+`findById(id)` -> Returns a location based on the passed in ID.
+
+`remove(id)` -> Removes locatoin based in the passed in ID Returns the number of locations deleted.
+
+`update(id, changes)` -> Updates the location based on the passed in ID. Returns the location with the changes.
+
+<br>
+<br>
+<br>
+
+
+### Push notifications
+`find()` -> returns all notifications filtered by ID and  subscriptions.
+
+`findBy(filter)` -> returns notifications based on the passed in filter.
+
+`findBy(filter)` -> returns notifications based on the passed in filter.
+
+##  Environment Variables
 
 In order for the app to function correctly, the user must set up their own environment variables.
 
 create a .env file that includes the following:
 
-🚫 These are just examples, replace them with the specifics for your app
-    
-    *  STAGING_DB - optional development db for using functionality not available in SQLite
     *  NODE_ENV - set to "development" until ready for "production"
-    *  JWT_SECRET - you can generate this by using a python shell and running import random''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&amp;*(-*=+)') for i in range(50)])
-    *  SENDGRID_API_KEY - this is generated in your Sendgrid account
-    *  stripe_secret - this is generated in the Stripe dashboard
-    
+    *  TWILIO_ID - This app uses twillio to send text messages. You can get your own keys by going to [Twillio.com](https://twilio.com)
+    *  TWILIO_AUTH -  see above.
+    *  VAPID_PRIVATE - `yarn global add web-push` then `web-push generate-vapid-keys`
+    *  VAPID_PUBLIC - see above
+    *  GEO_CODE_KEY - To get your own Geocode keys go to [opencagedata](https://opencagedata.com/users/sign_up)
+    *  JWT_SECRET - "Fireflight Secret"  This is a terrible secret. Also, we should use a third-party auth library.*
+
 ## Contributing
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
@@ -173,5 +190,9 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 ## Documentation
 
-See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
-🚫 Add DS iOS and/or Andriod links here if applicable.
+See [Frontend Documentation](https://github.com/labs15-forest-fire/frontend) for details on the fronend of our project.
+
+See [iOS Documentation](https://github.com/labs15-forest-fire/iOS) for details on the mobile iOS version of our project.
+
+See [Data Science Documentation](https://github.com/labs15-forest-fire/Data-Science) for details on the data science behind our application.
+
