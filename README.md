@@ -18,7 +18,7 @@ To get the server running locally:
 
 ### Backend framework
 
--    We chose Express because it is fast an un-opinionated.  
+-    We chose Express because it is fast and un-opinionated.  
 -    Knex is just simple to use. It has good documentation for both SQLite and Postgresql. 
 -    Axios is easy to use. It supports Promises. 
 
