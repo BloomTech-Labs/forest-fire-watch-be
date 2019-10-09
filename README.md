@@ -50,7 +50,6 @@ To get the server running locally:
 
 # Data Model
 
-
 #### Users
 
 ---
