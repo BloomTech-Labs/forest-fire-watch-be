@@ -24,7 +24,6 @@ To get the server running locally:
 
 ##  Endpoints
 
-
 #### Auth Routes
 
 | Method | Endpoint               | Access Control | Description                                  |
