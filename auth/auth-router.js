@@ -45,10 +45,15 @@ router.post("/register", (req, res) => {
             })
             .catch(error => {
               res.status(500).json(error);
+              console.log(error)
             });
         });
       }
-    });
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
 });
 
 router.post("/login", (req, res) => {
