@@ -17,7 +17,10 @@ server.use(express.json());
 server.use(cors());
 
 // scheduler;
-
+server.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://wildfire-watch-staging.netlify.com');
+  next();
+});
 console.log();
 
 server.use("/api/auth", authRouter);

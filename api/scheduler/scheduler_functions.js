@@ -1,4 +1,4 @@
-const DSbaseURL = "https://fire-data-api.herokuapp.com";
+const DSbaseURL = "https://wildfirewatch.herokuapp.com";
 const axios = require("axios");
 
 const getAmericaFires = () => {
