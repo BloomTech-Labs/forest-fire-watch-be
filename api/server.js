@@ -18,7 +18,7 @@ server.use(cors());
 
 // scheduler;
 server.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Origin', 'https://wildfire-watch-staging.netlify.com');
   next();
 });
 console.log();
