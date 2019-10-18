@@ -18,14 +18,15 @@ server.use(cors());
 
 // scheduler;
 server.use((req, res, next) => {
-  // ["https://wildfire-watch-staging.netlify.com", "http://localhost:3000"].map(
-  ["http://localhost:3001"].map(domain =>
-    res.setHeader("Access-Control-Allow-Origin", domain)
-  ); // res.setHeader('Access-Control-Allow-Origin', 'https://wildfire-watch-staging.netlify.com');
+  // ["http://localhost:3000", "https://wildfire-watch-staging.netlify.com"].map(
+  //   // ["http://localhost:3000"].map(domain =>
+  //   res.setHeader("Access-Control-Allow-Origin", domain)
+  // );
+
+  res.setHeader("Access-Control-Allow-Origin", "*");
 
   next();
 });
-console.log();
 
 server.use("/api/auth", authRouter);
 server.use("/api/users", usersRouter);
