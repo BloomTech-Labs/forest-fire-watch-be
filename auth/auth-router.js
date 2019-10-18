@@ -77,7 +77,7 @@ router.post("/login", (req, res) => {
         });
       } else {
         if (!user) {
-          res.status(404).json({ message: "User does not exist" });
+          res.status(403).json({ message: "User does not exist" });
         }
         // if (user && !bcrypt.compareSync(password, user.password)) {
         //   errors.password = "Login failed";
