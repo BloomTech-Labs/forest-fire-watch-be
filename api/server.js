@@ -19,7 +19,6 @@ server.use(cors());
 // scheduler;
 server.use((req, res, next) => {
   // ["http://localhost:3000", "https://wildfire-watch-staging.netlify.com"].map(
-  //   // ["http://localhost:3000"].map(domain =>
   //   res.setHeader("Access-Control-Allow-Origin", domain)
   // );
 
