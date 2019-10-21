@@ -23,21 +23,20 @@ router.post("/register", (req, res) => {
 
   const user = req.body;
 
-
   Users.findBy({ email: user.email })
     .first()
     .then(user1 => {
       if (user1) {
         res
           .status(409)
-          .json({ email: "A user with that name already exists" });
+          .json({ email: "A user with that email already exists" });
       } else {
         Users.add(user).then(saved => {
           Users.findBy({ email: user.email })
             .first()
             .then(user => {
               const token = generateToken(user);
-              // console.log(token);
+              console.log(token);
               res.status(201).json({
                 message: `Welcome ${user.firstName}!`,
                 token
@@ -45,15 +44,14 @@ router.post("/register", (req, res) => {
             })
             .catch(error => {
               res.status(500).json(error);
-              console.log(error)
+              console.log(error);
             });
         });
       }
     })
-    .catch((err) => {
-      console.log(err)
-    })
-
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 router.post("/login", (req, res) => {
@@ -87,7 +85,7 @@ router.post("/login", (req, res) => {
     })
     .catch(error => {
       res.status(500).json({ error });
-      console.log(error)
+      console.log(error);
     });
 });
 
