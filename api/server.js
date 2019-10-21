@@ -34,7 +34,7 @@ server.use("/api/push", notificationsRouter);
 server.use("/api/scheduler", schedulerRouter);
 
 server.get("/", (req, res) => {
-  res.send("Welcome to the FireFlight Backend!");
+  res.send("Welcome to the Wildfire Watch Backend!");
 });
 
 module.exports = server;
