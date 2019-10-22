@@ -1,11 +1,10 @@
 # API Documentation
 
-####  Backend delpoyed at [Heroku]("#") <br>
+#### Backend deployed at [Heroku]("#") <br>
 
 ## Getting started
 
 To get the server running locally:
-
 
 - Clone this repo
 - **yarn install** to install all required dependencies
@@ -13,23 +12,22 @@ To get the server running locally:
 - **knex migrate:latest --env=testing** To set up the testing database.
 - **yarn test** to start server using testing environment
 - **yarn knex migrate:latest** to create the tabes in the dev environment
-- **yarn knex seed:run** to clear the DB and populate it with seed data **** Password for all seed users is "password" ****
-
+- **yarn knex seed:run** to clear the DB and populate it with seed data \***\* Password for all seed users is "password" \*\***
 
 ### Backend framework
 
--    We chose Express because it is fast and un-opinionated.  
--    Knex is just simple to use. It has good documentation for both SQLite and Postgresql. 
--    Axios is easy to use. It supports Promises. 
+- We chose Express because it is fast and un-opinionated.
+- Knex is just simple to use. It has good documentation for both SQLite and Postgresql.
+- Axios is easy to use. It supports Promises.
 
-##  Endpoints
+## Endpoints
 
 #### Auth Routes
 
-| Method | Endpoint               | Access Control | Description                                  |
-| ------ | ---------------------- | -------------- | -------------------------------------------- |
-| POST   | `/api/auth/register`   | all users      | Takes in a JSON with username and password keys. Returns a JSON Web Token (string) as res.token |
-| POST   | `/api/auth/login`      | all users      | Modify an existing organization.             |
+| Method | Endpoint             | Access Control | Description                                                                                     |
+| ------ | -------------------- | -------------- | ----------------------------------------------------------------------------------------------- |
+| POST   | `/api/auth/register` | all users      | Takes in a JSON with username and password keys. Returns a JSON Web Token (string) as res.token |
+| POST   | `/api/auth/login`    | all users      | Modify an existing organization.                                                                |
 
 #### User Routes
 
@@ -41,12 +39,12 @@ To get the server running locally:
 
 #### Location Routes
 
-| Method | Endpoint               | Access Control | Description                                                                                                                            |
-| ------ | ---------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| GET    | `/api/locations/`      | all users      | Returns a list of locations for the logged in user.                                                                                    |
-| POST   | `/api/locations/`      | all users      | Takes in a JSON with "latitude", "longitude", "address", and a FOREIGN KEY called "user_id" and adds a location to the logged in user. |
-| PUT    | `/api/locations/:id`   | all users      | Updates the location with the ID provided (only if the user owns that location)                                                        |
-| DELETE | `/api/locations/:id`   | all users      | Deletes the location with the ID provided (only if the user owns that location)                                                        |
+| Method | Endpoint             | Access Control | Description                                                                                                                            |
+| ------ | -------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| GET    | `/api/locations/`    | all users      | Returns a list of locations for the logged in user.                                                                                    |
+| POST   | `/api/locations/`    | all users      | Takes in a JSON with "latitude", "longitude", "address", and a FOREIGN KEY called "user_id" and adds a location to the logged in user. |
+| PUT    | `/api/locations/:id` | all users      | Updates the location with the ID provided (only if the user owns that location)                                                        |
+| DELETE | `/api/locations/:id` | all users      | Deletes the location with the ID provided (only if the user owns that location)                                                        |
 
 # Data Model
 
@@ -58,7 +56,7 @@ To get the server running locally:
 {
   id: UUID
   username: STRING
-  password: STRING 
+  password: STRING
   cellphone: INTEGER
   receive_sms: BOOLEAN
   receive_push: BOOLEAN
@@ -78,9 +76,10 @@ To get the server running locally:
   radius: INTEGER
   last_alert: INTEGER
   notification_timer: INTEGER
-  
+
 }
 ```
+
 #### Notifications
 
 ```
@@ -89,11 +88,12 @@ type: STRING
 subscriptions: TEXT
 }
 ```
+
 ## Actions
 
-
 ### Users
-`find()` -> Returns all users. *Not really used in this application*
+
+`find()` -> Returns all users. _Not really used in this application_
 
 `findBy(filter)` -> Returns a single user by the passed in filter.
 
@@ -101,7 +101,7 @@ subscriptions: TEXT
 
 `findById(id)` -> Returns the user with the matching ID.
 
-`remove(id)` -> Delete a user by ID. *Not used in this application*
+`remove(id)` -> Delete a user by ID. _Not used in this application_
 
 `update(id, changes)` -> Updates user based on passed in `changes`. Returns the user with the changes.
 <br>
@@ -128,15 +128,15 @@ subscriptions: TEXT
 <br>
 <br>
 
-
 ### Push notifications
-`find()` -> returns all notifications filtered by ID and  subscriptions.
+
+`find()` -> returns all notifications filtered by ID and subscriptions.
 
 `findBy(filter)` -> returns notifications based on the passed in filter.
 
 `findBy(filter)` -> returns notifications based on the passed in filter.
 
-##  Environment Variables
+## Environment Variables
 
 In order for the app to function correctly, the user must set up their own environment variables.
 
@@ -158,11 +158,12 @@ Please note we have a [code of conduct](./code_of_conduct.md). Please follow it 
 
 ### Issue/Bug Request
 
- **If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
- - Check first to see if your issue has already been reported.
- - Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
- - Create a live example of the problem.
- - Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes,  where you believe the issue is originating from, and any potential solutions you have considered.
+**If you are having an issue with the existing project code, please submit a bug report under the following guidelines:**
+
+- Check first to see if your issue has already been reported.
+- Check to see if the issue has recently been fixed by attempting to reproduce the issue using the latest master branch in the repository.
+- Create a live example of the problem.
+- Submit a detailed bug report including your environment & browser, steps to reproduce the issue, actual and expected outcomes, where you believe the issue is originating from, and any potential solutions you have considered.
 
 ### Feature Requests
 
@@ -193,4 +194,3 @@ See [Frontend Documentation](https://github.com/labs15-forest-fire/frontend) for
 See [iOS Documentation](https://github.com/labs15-forest-fire/iOS) for details on the mobile iOS version of our project.
 
 See [Data Science Documentation](https://github.com/labs15-forest-fire/Data-Science) for details on the data science behind our application.
-

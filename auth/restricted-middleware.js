@@ -1,26 +1,21 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
-
-  const token = req.headers.authorization
-  const secret = process.env.JWT_SECRET || 'FireFlight Secret!';
+  const token = req.headers.authorization;
+  const secret = process.env.JWT_SECRET || "FireFlight Secret!";
 
   if (token) {
     jwt.verify(token, secret, {}, (err, decoded) => {
-      if(err) {
+      if (err) {
         //invalid token
-        res.status(401).json({ you: 'shall not pass'}) 
+        res.status(401).json({ message: "You shall not pass" });
       } else {
         //valid token
-        
-        req.jwt = { username: decoded.username, user_id: decoded.subject }
-
-
-
+        req.jwt = { username: decoded.username, user_id: decoded.subject };
         next();
       }
     });
   } else {
-    res.status(401).json({ you: 'no token provided'}) 
+    res.status(401).json({ message: "Please provide a token" });
   }
-}
+};

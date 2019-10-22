@@ -51,6 +51,7 @@ router.post("/register", (req, res) => {
     })
     .catch(err => {
       console.log(err);
+      res.status(500).json({ message: error.message });
     });
 });
 
@@ -84,19 +85,21 @@ router.post("/login", (req, res) => {
       }
     })
     .catch(error => {
-      res.status(500).json({ error });
       console.log(error);
+      res.status(500).json({ message: error.message });
     });
 });
 
 function generateToken(user) {
-  // console.log("user: ", user);
   const jwtPayload = {
     subject: user.id,
+    // firstName: user.firstName,
+    // lastName: user.lastName
     username: user.username
   };
 
   const jwtSecret = process.env.JWT_SECRET || "FireFlight Secret!";
+
   const jwtOptions = {
     expiresIn: "1d"
   };
