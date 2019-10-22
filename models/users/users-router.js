@@ -20,13 +20,13 @@ router.get("/user", restricted, (req, res) => {
       res.json(user);
     })
     .catch(err => {
-      console.log(err);
+      console.log("user route", err);
       res.send(err);
     });
 });
 
 router.get("/session", restricted, (req, res) => {
-  console.log(req.jwt);
+  console.log("session route", req.jwt);
   res.status(200).json(req.jwt);
 });
 

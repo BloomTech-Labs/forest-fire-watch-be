@@ -36,9 +36,9 @@ router.post("/register", (req, res) => {
             .first()
             .then(user => {
               const token = generateToken(user);
-              console.log(token);
+              console.log("register token", token);
               res.status(201).json({
-                message: `Welcome ${user.firstName}!`,
+                message: `Welcome ${user.first_name}!`,
                 token
               });
             })
@@ -69,7 +69,7 @@ router.post("/login", (req, res) => {
     .then(user => {
       if (user) {
         const token = generateToken(user);
-        console.log(token);
+        console.log("login token", token);
         res.status(200).json({
           message: `Welcome ${user.firstName}!`,
           token
@@ -93,8 +93,7 @@ router.post("/login", (req, res) => {
 function generateToken(user) {
   const jwtPayload = {
     subject: user.id,
-    // firstName: user.firstName,
-    // lastName: user.lastName
+    // email: user.email,
     username: user.username
   };
 
