@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
         res.status(401).json({ message: "You shall not pass" });
       } else {
         //valid token
-        req.jwt = { username: decoded.username, user_id: decoded.subject };
+        req.jwt = { email: decoded.email, user_id: decoded.subject };
         next();
       }
     });
