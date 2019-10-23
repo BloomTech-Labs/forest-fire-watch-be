@@ -15,11 +15,13 @@ router.post("/register", (req, res) => {
   // Inside the validation function it checks that the username and password meets certain criteria.
   // If there are no errors then isValid is returned as true and we continue on with the rest of the post request.
   // If there is an error, we return a status 400 along with the errors object that includes all the error descriptions that were encountered
-  // const { errors, isValid } = validateRegisterInput(req.body);
 
-  // if (!isValid) {
-  //   return res.status(400).json(errors);
-  // }
+  const { errors, isValid } = validateRegisterInput(req.body);
+
+  if (!isValid) {
+    // return res.status(400);
+    return res.status(400).json({ message: errors.message });
+  }
 
   const user = req.body;
 
@@ -36,9 +38,9 @@ router.post("/register", (req, res) => {
             .first()
             .then(user => {
               const token = generateToken(user);
-              console.log(token);
+              console.log("user", user);
               res.status(201).json({
-                message: `Welcome ${user.firstName}!`,
+                message: `Welcome ${user.first_name}!`,
                 token
               });
             })
@@ -51,6 +53,7 @@ router.post("/register", (req, res) => {
     })
     .catch(err => {
       console.log(err);
+      res.status(500).json({ message: error.message });
     });
 });
 
@@ -68,9 +71,9 @@ router.post("/login", (req, res) => {
     .then(user => {
       if (user) {
         const token = generateToken(user);
-        console.log(token);
+        console.log("login token", token);
         res.status(200).json({
-          message: `Welcome ${user.firstName}!`,
+          message: `Welcome ${user.first_name}!`,
           token
         });
       } else {
@@ -84,19 +87,19 @@ router.post("/login", (req, res) => {
       }
     })
     .catch(error => {
-      res.status(500).json({ error });
       console.log(error);
+      res.status(500).json({ message: error.message });
     });
 });
 
 function generateToken(user) {
-  // console.log("user: ", user);
   const jwtPayload = {
     subject: user.id,
-    username: user.username
+    email: user.email
   };
 
   const jwtSecret = process.env.JWT_SECRET || "FireFlight Secret!";
+
   const jwtOptions = {
     expiresIn: "1d"
   };
