@@ -17,8 +17,15 @@ server.use(express.json());
 server.use(cors());
 
 // scheduler;
+server.use((req, res, next) => {
+  // ["http://localhost:3000", "https://wildfire-watch-staging.netlify.com"].map(
+  //   res.setHeader("Access-Control-Allow-Origin", domain)
+  // );
 
-console.log();
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
+  next();
+});
 
 server.use("/api/auth", authRouter);
 server.use("/api/users", usersRouter);
@@ -27,7 +34,7 @@ server.use("/api/push", notificationsRouter);
 server.use("/api/scheduler", schedulerRouter);
 
 server.get("/", (req, res) => {
-  res.send("Welcome to the FireFlight Backend!");
+  res.send("Welcome to the Wildfire Watch Backend!");
 });
 
 module.exports = server;

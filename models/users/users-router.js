@@ -8,7 +8,10 @@ router.get("/", restricted, (req, res) => {
     .then(users => {
       res.json(users);
     })
-    .catch(err => res.send(err));
+    .catch(err => {
+      console.log(err);
+      res.send(err);
+    });
 });
 
 router.get("/user", restricted, (req, res) => {
@@ -16,11 +19,14 @@ router.get("/user", restricted, (req, res) => {
     .then(user => {
       res.json(user);
     })
-    .catch(err => res.send(err));
+    .catch(err => {
+      console.log("user route", err);
+      res.send(err);
+    });
 });
 
 router.get("/session", restricted, (req, res) => {
-  console.log(req.jwt);
+  console.log("session route", req.jwt);
   res.status(200).json(req.jwt);
 });
 

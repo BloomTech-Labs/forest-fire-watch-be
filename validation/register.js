@@ -7,23 +7,16 @@ module.exports = function validateRegisterInput(data) {
     // status: false or true
   };
 
-  data.username = !isEmpty(data.username) ? data.username : "";
-  data.password = !isEmpty(data.password) ? data.password : "";
+  // If first_name is not empty, then set first_name. If empty, will set as empty string
+  data.first_name = !isEmpty(data.first_name) ? data.first_name : "";
+  data.last_name = !isEmpty(data.last_name) ? data.last_name : "";
 
-  if (!validator.isLength(data.username, { min: 5, max: 30 })) {
-    errors.username = "Username must be between 5 and 30 characters";
+  if (validator.isEmpty(data.first_name)) {
+    errors.message = "First name field is required";
   }
 
-  if (validator.isEmpty(data.username)) {
-    errors.username = "Username field is required";
-  }
-
-  if (validator.isEmpty(data.password)) {
-    errors.password = "Password field is required";
-  }
-
-  if (!validator.isLength(data.password, { min: 6, max: 30 })) {
-    errors.password = "Password must be between 6 and 30 characters";
+  if (validator.isEmpty(data.last_name)) {
+    errors.message = "Last name field is required";
   }
 
   return {
