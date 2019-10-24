@@ -18,7 +18,8 @@ describe("Haversine Function", () => {
     expect(result.toFixed(2)).toEqual("324.53")
   })
 
-  it.skip("Should return a string", () => {
+  it("Should return a string", () => {
     const result = haversineDistance([40.689202777778, -74.044219444444], [38.889069444444, -77.034502777778])
+    expect(result.toFixed(2)).toEqual("324.53")
   })
 })
