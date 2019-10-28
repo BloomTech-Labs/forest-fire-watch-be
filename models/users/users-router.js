@@ -64,4 +64,15 @@ router.delete("/", async (req, res) => {
   }
 });
 
+router.put("/:id", restricted, (req, res) => {
+  const uid = req.params.id
+  Users.update(uid, req.body)
+    .then(updated => {
+      res.status(204).json(updated)
+    })
+    .catch(err => {
+      res.status(500).json(err)
+    })
+})
+
 module.exports = router;
