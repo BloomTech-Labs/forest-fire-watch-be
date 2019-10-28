@@ -36,6 +36,7 @@ To get the server running locally:
 | GET    | `/api/users/session` | all users      | Returns info for the logged in user.                                         |
 | PUT    | `/api/users/`        | all users      | Takes in a JSON like this: { username: "newName" } and updates the username. |
 | DELETE | `/api/users/`        | all users      | Deletes the logged in user.                                                  |
+| PUT    | `/api/users/update/:id`| signed in    | Updates the requested user associated with the ID                            |
 
 #### Location Routes
 
