@@ -35,8 +35,8 @@ function remove(id) {
     .del();
 }
 
-function update(uid, changes) {
+function update(UID, changes) {
   return db("users")
-    .where({ uid })
+    .where({ UID })
     .update(changes, "*");
 }
