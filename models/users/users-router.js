@@ -65,14 +65,14 @@ router.delete("/", async (req, res) => {
 });
 
 router.put("/update/:id", restricted, (req, res) => {
-  const uid = req.params.id
-  Users.update(uid, req.body)
+  const uid = req.params.id;
+  Users.updateEmail(uid, req.body)
     .then(updated => {
-      res.status(204).json(updated)
+      res.status(204).json(updated);
     })
     .catch(err => {
-      res.status(500).json(err)
-    })
-})
+      res.status(500).json(err);
+    });
+});
 
 module.exports = router;
