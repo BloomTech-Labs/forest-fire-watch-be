@@ -17,6 +17,7 @@ router.get("/", restricted, async (req, res) => {
 });
 
 router.post("/", restricted, async (req, res) => {
+  console.log("BODY", req.body)
   try {
     let user_latitude;
     let user_longitude;
@@ -26,6 +27,10 @@ router.post("/", restricted, async (req, res) => {
         `https://api.opencagedata.com/geocode/v1/json?q=${req.body.address}&key=${process.env.GEO_CODE_KEY}`
       )
       .then(async result => {
+
+        console.log("LOCATIONS POST RESULT", result.data.results)
+        console.log("RESULT", result.data)
+
         user_latitude = result.data.results[0].geometry.lat;
         user_longitude = result.data.results[0].geometry.lng;
 
@@ -43,7 +48,8 @@ router.post("/", restricted, async (req, res) => {
             .status(404)
             .json({ message: `You're missing data from a required field` });
         }
-      });
+      }).
+      catch(err => console.log(err));
   } catch (error) {
     // log error to server
     console.log(error);
