@@ -2,8 +2,8 @@ const DSbaseURL = "https://wildfirewatch.herokuapp.com";
 const axios = require("axios");
 
 const getAmericaFires = () => {
-  return axios.get(`${DSbaseURL}/all_fires`).then(res => {
-    let USAfires = res.data.Fires;
+  return axios.get(`${DSbaseURL}/fpfire`).then(res => {
+    let USAfires = res.data;
     return USAfires;
   });
 };
