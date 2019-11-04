@@ -62,17 +62,22 @@ router.get("/", async (req, res) => {
       const body = `There are ${nrFires} fires within ${alertLoc.radius} miles of ${alertLoc.address}. The closest fire, ${closestFireName}, is ${closestDistance} miles from your location.`;
       console.log(`notification_timer: ${alertLoc.notification_timer}`)
 
-      if (alertLoc.notification_timer === 0) {
-        if (alertLoc.receive_sms) {
-          alertMessage(alertLoc.cell_number, body);
-        }
-        if (alertLoc.receive_push) {
-          push(alertLoc.user_id, {
-            title: "Wildfire Notification",
-            body: body
-          });
-        }
+      // if (alertLoc.notification_timer === 0) {
+      // if (alertLoc.receive_sms) {
+      //   alertMessage(alertLoc.cell_number, body);
+      // }
+
+      console.log("receive_push: " + alertLoc.receive_push);
+      console.log("user_id: " + alertLoc.user_id);
+      console.log("user_id: " + Object.keys(alertLoc));
+
+      if (alertLoc.receive_push) {
+        push(alertLoc.user_id, {
+          title: "Wildfire Notification",
+          body: body
+        });
       }
+      // }
 
       if (alertLoc.notification_timer === 12) {
         await Locations.update(alertLoc.id, { notification_timer: 0 });
