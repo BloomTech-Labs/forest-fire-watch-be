@@ -11,8 +11,6 @@ webpush.setVapidDetails(
     privateVapid
 );
 
-console.log("PRIVATE", privateVapid);
-
 /**
  * push to a service
  * @param {string}   id id of user
