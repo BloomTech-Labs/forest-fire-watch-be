@@ -6,6 +6,7 @@ module.exports = {
   findAll,
   findBy,
   findById,
+  findByNotif,
   remove,
   update
 };
@@ -33,6 +34,11 @@ function findAll() {
 
 function findBy(filter) {
   return db("locations")
+    .where(filter);
+}
+
+function findByNotif(filter) {
+  return db("locations")
     .where(filter)
     .join("users", "users.id", "locations.user_id")
     .select(
@@ -48,6 +54,8 @@ function findBy(filter) {
       "users.receive_push"
     );
 }
+
+
 
 async function add(location) {
   const [id] = await db("locations").insert(location, "id");
