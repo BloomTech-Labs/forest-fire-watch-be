@@ -16,9 +16,8 @@ router.get("/", async (req, res) => {
     let alertLocations = [];
 
     locations.forEach(location => {
-
       var nrFires = 0;
-      var closestFireName = '';
+      var closestFireName = "";
       var closestDistance = -1;
 
       if (location.latitude && location.longitude) {
@@ -40,10 +39,15 @@ router.get("/", async (req, res) => {
               closestDistance = distance;
             }
           }
-        })
+        });
 
         if (nrFires > 0) {
-          alertLocations.push([location, closestFireName, closestDistance, nrFires]);
+          alertLocations.push([
+            location,
+            closestFireName,
+            closestDistance,
+            nrFires
+          ]);
         }
       }
     });
@@ -60,7 +64,7 @@ router.get("/", async (req, res) => {
       const nrFires = alertLocation[3];
 
       const body = `There are ${nrFires} fires within ${alertLoc.radius} miles of ${alertLoc.address}. The closest fire, ${closestFireName}, is ${closestDistance} miles from your location.`;
-      console.log(`notification_timer: ${alertLoc.notification_timer}`)
+      console.log(`notification_timer: ${alertLoc.notification_timer}`);
 
       // if (alertLoc.notification_timer === 0) {
       // if (alertLoc.receive_sms) {

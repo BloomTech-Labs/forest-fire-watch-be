@@ -26,7 +26,7 @@ router.get("/user", restricted, (req, res) => {
 });
 
 router.get("/session", restricted, (req, res) => {
-  console.log("session route", req.jwt);
+  // console.log("session route", req.jwt);
   res.status(200).json(req.jwt);
 });
 

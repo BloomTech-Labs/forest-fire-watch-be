@@ -10,6 +10,7 @@ const scheduler_functions = require("./scheduler_functions");
 
 // Add new geocoding into the add location api call.
 
+// Scheduled every 30 minutes
 cron.schedule("30 * * * *", async function() {
   console.log("Running Cron Scheduler");
 
