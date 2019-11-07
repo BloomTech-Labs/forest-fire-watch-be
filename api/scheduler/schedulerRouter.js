@@ -6,11 +6,18 @@ router.get("/", async (req, res) => {
   await sendSmsAndPushNotifications();
 });
 
-router.get("/user", restricted, async (req, res) => {
+router.get("/triggerSMS", restricted, async (req, res) => {
   const user_id = req.jwt.user_id;
   console.log(user_id);
 
-  await sendSmsAndPushNotifications(user_id);
+  await sendSmsAndPushNotifications(user_id, true, false);
+});
+
+router.get("/triggerPush", restricted, async (req, res) => {
+  const user_id = req.jwt.user_id;
+  console.log(user_id);
+
+  await sendSmsAndPushNotifications(user_id, false, true);
 });
 
 module.exports = router;
