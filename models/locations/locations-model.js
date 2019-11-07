@@ -39,7 +39,6 @@ function findBy(filter) {
 
 function findByNotif(filter) {
   return db("locations")
-    .where(filter)
     .join("users", "users.id", "locations.user_id")
     .select(
       "locations.id",
@@ -52,7 +51,7 @@ function findByNotif(filter) {
       "users.cell_number",
       "users.receive_sms",
       "users.receive_push"
-    );
+    ).where(filter);
 }
 
 
