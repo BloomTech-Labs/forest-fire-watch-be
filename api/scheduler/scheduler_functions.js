@@ -50,7 +50,7 @@ const haversineDistance = (latlngA, latlngB, isMiles) => {
 };
 
 
-async function sendSmsAndPushNotifications(user_id = null) {
+async function sendSmsAndPushNotifications(user_id = null, triggerSmsOnly = false, triggerPushOnly = false) {
   try {
     console.log("Running Scheduler");
 
@@ -125,18 +125,31 @@ async function sendSmsAndPushNotifications(user_id = null) {
       console.log("receive_sms: " + alertLoc.receive_sms);
       console.log("receive_push: " + alertLoc.receive_push);
 
-      // if (alertLoc.notification_timer === 0) {
-      if (alertLoc.receive_sms) {
-        alertMessage(alertLoc.cell_number, body);
-      }
+      if (triggerSmsOnly && !triggerPushOnly) {
+        if (alertLoc.receive_sms) {
+          alertMessage(alertLoc.cell_number, body);
+        }
+      } else if (triggerPushOnly && !triggerSmsOnly) {
+        if (alertLoc.receive_push) {
+          push(alertLoc.user_id, {
+            title: "Wildfire Notification",
+            body: body
+          });
+        }
+      } else {
+        // if (alertLoc.notification_timer === 0) {
+        if (alertLoc.receive_sms) {
+          alertMessage(alertLoc.cell_number, body);
+        }
 
-      if (alertLoc.receive_push) {
-        push(alertLoc.user_id, {
-          title: "Wildfire Notification",
-          body: body
-        });
+        if (alertLoc.receive_push) {
+          push(alertLoc.user_id, {
+            title: "Wildfire Notification",
+            body: body
+          });
+        }
+        // }
       }
-      // }
 
       if (alertLoc.notification_timer === 12) {
         await Locations.update(alertLoc.id, { notification_timer: 0 });
