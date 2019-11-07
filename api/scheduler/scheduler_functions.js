@@ -61,7 +61,9 @@ async function sendSmsAndPushNotifications(user_id = null, triggerSmsOnly = fals
     if (user_id === null) {
       locations = await Locations.findAll();
     } else {
-      locations = await Locations.findByNotif(location => location.user_id == user_id);
+      console.log(`user id filter: ${user_id}`)
+      locations = await Locations.findAll();
+      locations = locations.filter(location => location.user_id == user_id);
     }
 
     let alertLocations = [];
