@@ -13,6 +13,9 @@ router.post('/register', restricted, async (req, res) => {
     console.log("sub: " + sub);
     console.log(req.jwt.user_id);
 
+    const r = await Notifications.removeWebNotificationsForUser(req.jwt.user_id);
+    console.log(r);
+
     let userSub = await Notifications.add({ subscription: sub, type: 'web', user_id: req.jwt.user_id })
     if (userSub)
       res.status(201).json({});
