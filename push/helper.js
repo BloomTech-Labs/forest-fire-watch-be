@@ -6,7 +6,7 @@ const publicVapid = process.env.VAPID_PUBLIC;
 const Notifications = require("../models/push-notifications/notifications-model.js");
 
 webpush.setVapidDetails(
-    "mailto:fireflightapp@gmail.com",
+    "mailto:contact.firewatch@gmail.com",
     publicVapid,
     privateVapid
 );
@@ -21,6 +21,9 @@ const push = async (id, configs) => {
     let subscriptions = await Notifications.findBy({
         user_id: id
     });
+
+    console.log(subscriptions);
+
     //for making sure we don't send repeats
     let ios = false,
         web = false;
@@ -31,7 +34,9 @@ const push = async (id, configs) => {
         let subData;
         if (subscription.type == "web")
             subData = JSON.parse(subscription.subscription);
-        else subData = subscription.subscription;
+        else
+            subData = subscription.subscription;
+
         //if web and first sent to web
         if (subscription.type == "web" && !web) {
             try {
@@ -83,7 +88,7 @@ const push = async (id, configs) => {
                 console.error("Error", err);
             }
         }
-        provider.shutdown();
+        // provider.shutdown();
     });
 };
 
