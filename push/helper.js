@@ -5,6 +5,8 @@ const privateVapid = process.env.VAPID_PRIVATE;
 const publicVapid = process.env.VAPID_PUBLIC;
 const Notifications = require("../models/push-notifications/notifications-model.js");
 
+console.log("Using the following VAPID keys: ", publicVapid, privateVapid);
+
 webpush.setVapidDetails(
     "mailto:contact.firewatch@gmail.com",
     publicVapid,
