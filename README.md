@@ -33,13 +33,16 @@ To get the server running locally:
 
 | Method | Endpoint             | Access Control | Description                                                                  |
 | ------ | -------------------- | -------------- | ---------------------------------------------------------------------------- |
-| GET    | `/api/users/` | all users      | Finds all users and returns the JSON array of all users.  
+| GET    | `/api/users/` | all users      | Finds all users and returns the JSON array of all users.  |
 
 | GET    | `/api/user` | signed in     | Returns information for the logged in user. |
 
 | GET    | `/api/users/session` | all users     | Returns the token for the logged in user.                               |
+
 | PUT    | `/api/users/`        | all users     | Takes in a JSON like this: { email: "newEmail" } and updates the email. |
+
 | DELETE | `/api/users/`        | all users     | Deletes the logged in user.                                             |
+
 | PUT    | `/api/users/update/:id`| signed in    | Updates the requested user associated with the ID.                     |
 
 #### Location Routes
