@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const requestIp = require("request-ip");
 
 const Users = require("./users-model.js");
 const restricted = require("../../auth/restricted-middleware.js");
@@ -12,6 +13,11 @@ router.get("/", restricted, (req, res) => {
       console.log(err);
       res.send(err);
     });
+});
+
+router.get("/ip-address", (req, res) => {
+  const clientIp = requestIp.getClientIp(req);
+  res.status(200).json({ clientIP: clientIp });
 });
 
 router.get("/user", restricted, (req, res) => {
