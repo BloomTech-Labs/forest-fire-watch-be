@@ -18,9 +18,9 @@ router.get("/", restricted, (req, res) => {
 
 router.get("/ip-address", (req, res) => {
   const clientIp = requestIp.getClientIp(req);
-  axios.get(`http://ip-api.com/json/${clientIp}`).then(res => {
-    console.log("IP location", res)
-    res.status(200).json({ clientIpLocation: clientIp });
+  axios.get(`http://ip-api.com/json/${clientIp}`).then(result => {
+    console.log("IP location", result)
+    res.status(200).json({ clientIpLocation: result });
   })
     .catch(err => {
       console.log(err)
