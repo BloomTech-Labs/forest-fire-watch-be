@@ -19,6 +19,7 @@ To get the server running locally:
 - We chose Express because it is fast and un-opinionated.
 - Knex is just simple to use. It has good documentation for both SQLite and Postgresql.
 - Axios is easy to use. It supports Promises.
+- Firebase Auth is used on the front end for authentication then upon successful login or register BE is passed a UID associated with that user which then on register generates a JSON Web Token that is further used to verify and secure the account. 
 
 ## Endpoints
 
@@ -37,6 +38,7 @@ To get the server running locally:
 | PUT    | `/api/users/`        | all users      | Takes in a JSON like this: { username: "newName" } and updates the username. |
 | DELETE | `/api/users/`        | all users      | Deletes the logged in user.                                                  |
 | PUT    | `/api/users/update/:id`| signed in    | Updates the requested user associated with the ID                            |
+| GET    | `/api/users/ip-address`| all users    | Takes the clients IP and returns the location data associated with it        |
 
 #### Location Routes
 
@@ -55,7 +57,7 @@ To get the server running locally:
 
 ```
 {
-  id: UUID
+  id: UID
   username: STRING
   password: STRING
   cellphone: INTEGER
