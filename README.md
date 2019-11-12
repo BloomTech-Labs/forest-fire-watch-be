@@ -21,6 +21,7 @@ To get the server running locally:
 - We chose Express because it is fast and un-opinionated.
 - Knex is just simple to use. It has good documentation for both SQLite and Postgresql.
 - Axios is easy to use. It supports Promises.
+- Firebase Auth is used on the front end for authentication then upon successful login or register BE is passed a UID associated with that user which then on register generates a JSON Web Token that is further used to verify and secure the account. 
 
 
 ### Backend built using:
@@ -46,12 +47,11 @@ To get the server running locally:
 
 | Method | Endpoint             | Access Control | Description                                                                  |
 | ------ | -------------------- | -------------- | ---------------------------------------------------------------------------- |
-| GET    | `/api/users/`        | all users      | Finds all users and returns the JSON array of all users.               |
-| GET    | `/api/user`          | signed in     | Returns information for the logged in user.                             |
-| GET    | `/api/users/session` | all users     | Returns the token for the logged in user.                               |
-| PUT    | `/api/users/`        | all users     | Takes in a JSON like this: { email: "newEmail" } and updates the email. |
-| DELETE | `/api/users/`        | all users     | Deletes the logged in user.                                             |
-| PUT    | `/api/users/update/:id`| signed in    | Updates the requested user associated with the ID.                     |
+| GET    | `/api/users/session` | all users      | Returns info for the logged in user.                                         |
+| PUT    | `/api/users/`        | all users      | Takes in a JSON like this: { username: "newName" } and updates the username. |
+| DELETE | `/api/users/`        | all users      | Deletes the logged in user.                                                  |
+| PUT    | `/api/users/update/:id`| signed in    | Updates the requested user associated with the ID                            |
+| GET    | `/api/users/ip-address`| all users    | Takes the clients IP and returns the location data associated with it        |
 
 #### Location Routes
 
