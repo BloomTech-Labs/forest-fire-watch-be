@@ -1,6 +1,6 @@
 # API Documentation
 
-#### Backend deployed at [Heroku]("https://wildfire-watch.herokuapp.com/") <br>
+#### Backend deployed at [Heroku](https://wildfire-watch.herokuapp.com/) <br>
 
 ## Getting started
 
