@@ -163,7 +163,6 @@ subscription: TEXT
 
 `update(id, changes)` -> Updates the subscription based on the passed in ID. Returns the subscription with the changes.
 <br>
-<br>
 
 ## Environment Variables
 
