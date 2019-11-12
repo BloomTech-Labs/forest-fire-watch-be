@@ -14,11 +14,24 @@ To get the server running locally:
 - **yarn knex migrate:latest** to create the tabes in the dev environment
 - **yarn knex seed:run** to clear the DB and populate it with seed data \***\* Password for all seed users is "password" \*\***
 
+## Tech Stack
+
 ### Backend framework
 
 - We chose Express because it is fast and un-opinionated.
 - Knex is just simple to use. It has good documentation for both SQLite and Postgresql.
 - Axios is easy to use. It supports Promises.
+
+
+### Backend built using:
+
+- NodeJS
+- ExpressJS
+- Twilio
+- Firebase: email and password based authentication
+- KnexJS: management of database structure
+- JWT: handling authorizations
+- PostgreSQL
 
 ## Endpoints
 
