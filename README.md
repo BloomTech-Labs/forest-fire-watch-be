@@ -143,7 +143,6 @@ subscription: TEXT
 `remove(id)` -> Removes location based on the passed in ID. Returns the number of locations deleted.
 
 `update(id, changes)` -> Updates the location based on the passed in ID. Returns the location with the changes.
-
 <br>
 
 ### Push notifications
