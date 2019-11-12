@@ -125,8 +125,6 @@ subscription: TEXT
 
 `updateEmail(UID, changes)` -> Finds the user based on UID and updates the user's email based on passed in `changes`. Returns the user with the changes.
 <br>
-<br>
-<br>
 
 ### Locations
 
@@ -147,8 +145,6 @@ subscription: TEXT
 `update(id, changes)` -> Updates the location based on the passed in ID. Returns the location with the changes.
 
 <br>
-<br>
-<br>
 
 ### Push notifications
 
@@ -167,6 +163,8 @@ subscription: TEXT
 `removeWebNotificationsForUser(user_id)` -> Removes a web subscription based on the passed in user_id.
 
 `update(id, changes)` -> Updates the subscription based on the passed in ID. Returns the subscription with the changes.
+<br>
+<br>
 
 ## Environment Variables
 
