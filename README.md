@@ -1,6 +1,6 @@
 # API Documentation
 
-#### Backend deployed at [Heroku]("#") <br>
+#### Backend deployed at [Heroku](https://wildfire-watch.herokuapp.com/) <br>
 
 ## Getting started
 
@@ -14,6 +14,8 @@ To get the server running locally:
 - **yarn knex migrate:latest** to create the tabes in the dev environment
 - **yarn knex seed:run** to clear the DB and populate it with seed data \***\* Password for all seed users is "password" \*\***
 
+## Tech Stack
+
 ### Backend framework
 
 - We chose Express because it is fast and un-opinionated.
@@ -21,14 +23,25 @@ To get the server running locally:
 - Axios is easy to use. It supports Promises.
 - Firebase Auth is used on the front end for authentication then upon successful login or register BE is passed a UID associated with that user which then on register generates a JSON Web Token that is further used to verify and secure the account. 
 
+
+### Backend built using:
+
+- NodeJS
+- ExpressJS
+- Twilio
+- Firebase: email and password based authentication
+- KnexJS: management of database structure
+- JWT: handling authorizations
+- PostgreSQL
+
 ## Endpoints
 
 #### Auth Routes
 
 | Method | Endpoint             | Access Control | Description                                                                                     |
 | ------ | -------------------- | -------------- | ----------------------------------------------------------------------------------------------- |
-| POST   | `/api/auth/register` | all users      | Takes in a JSON with username and password keys. Returns a JSON Web Token (string) as res.token |
-| POST   | `/api/auth/login`    | all users      | Modify an existing organization.                                                                |
+| POST   | `/api/auth/register` | all users      | Takes in a JSON with email and password keys. Returns a JSON Web Token (string) as res.token |
+| POST   | `/api/auth/login`    | all users      | Generates and returns a token that will be used for all future calls that require authentication.                                                                |
 
 #### User Routes
 
@@ -46,8 +59,8 @@ To get the server running locally:
 | ------ | -------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | GET    | `/api/locations/`    | all users      | Returns a list of locations for the logged in user.                                                                                    |
 | POST   | `/api/locations/`    | all users      | Takes in a JSON with "latitude", "longitude", "address", and a FOREIGN KEY called "user_id" and adds a location to the logged in user. |
-| PUT    | `/api/locations/:id` | all users      | Updates the location with the ID provided (only if the user owns that location)                                                        |
-| DELETE | `/api/locations/:id` | all users      | Deletes the location with the ID provided (only if the user owns that location)                                                        |
+| PUT    | `/api/locations/:id` | all users      | Updates the location with the ID provided (only if the user owns that location).                                                        |
+| DELETE | `/api/locations/:id` | all users      | Deletes the location with the ID provided (only if the user owns that location).                                                   |
 
 # Data Model
 
@@ -57,10 +70,11 @@ To get the server running locally:
 
 ```
 {
-  id: UID
-  username: STRING
-  password: STRING
-  cellphone: INTEGER
+  id: UUID
+  first_name: STRING
+  last_name: STRING
+  email: STRING
+  cell_number: INTEGER
   receive_sms: BOOLEAN
   receive_push: BOOLEAN
 }
@@ -79,6 +93,7 @@ To get the server running locally:
   radius: INTEGER
   last_alert: INTEGER
   notification_timer: INTEGER
+  notifications: BOOLEAN
 
 }
 ```
@@ -88,7 +103,7 @@ To get the server running locally:
 ```
 {
 type: STRING
-subscriptions: TEXT
+subscription: TEXT
 }
 ```
 
@@ -107,37 +122,47 @@ subscriptions: TEXT
 `remove(id)` -> Delete a user by ID. _Not used in this application_
 
 `update(id, changes)` -> Updates user based on passed in `changes`. Returns the user with the changes.
-<br>
-<br>
+
+`updateEmail(UID, changes)` -> Finds the user based on UID and updates the user's email based on passed in `changes`. Returns the user with the changes.
 <br>
 
 ### Locations
 
 `find()` -> Returns locations filtered by ID and address.
 
-`findAll()` -> Returns Users, their IDs and their Locatations.
+`findAll()` -> Returns Locations and the user's preferences.
 
 `findBy(filter)` -> Returns locations based on the passed in filter.
+
+`findByNotif(filter)` -> Returns  Locations and the user's preferences based on the passed in filter.
 
 `add(location)` -> Adds a location. Returns the new location's ID.
 
 `findById(id)` -> Returns a location based on the passed in ID.
 
-`remove(id)` -> Removes locatoin based in the passed in ID Returns the number of locations deleted.
+`remove(id)` -> Removes location based on the passed in ID. Returns the number of locations deleted.
 
 `update(id, changes)` -> Updates the location based on the passed in ID. Returns the location with the changes.
-
-<br>
-<br>
 <br>
 
 ### Push notifications
 
-`find()` -> returns all notifications filtered by ID and subscriptions.
+`find()` -> Returns all notifications filtered by ID and subscription.
+
+`findBy(filter)` -> Returns notifications based on the passed in filter.
 
 `findBy(filter)` -> returns notifications based on the passed in filter.
 
-`findBy(filter)` -> returns notifications based on the passed in filter.
+`add(subscription)` -> Adds a subscription. Returns the new subscription's ID.
+
+`findById(id)` -> Returns a subscription based on the passed in ID.
+
+`remove(id)` -> Removes a subscription based on the passed in ID. Returns the number of subscriptions deleted.
+
+`removeWebNotificationsForUser(user_id)` -> Removes a web subscription based on the passed in user_id.
+
+`update(id, changes)` -> Updates the subscription based on the passed in ID. Returns the subscription with the changes.
+<br>
 
 ## Environment Variables
 
@@ -148,7 +173,7 @@ create a .env file that includes the following:
     *  NODE_ENV - set to "development" until ready for "production"
     *  TWILIO_ID - This app uses twillio to send text messages. You can get your own keys by going to [Twillio.com](https://twilio.com)
     *  TWILIO_AUTH -  see above.
-    *  VAPID_PRIVATE - `yarn global add web-push` then `web-push generate-vapid-keys`
+    *  VAPID_PRIVATE - `yarn global add web-push` then `web-push generate-vapid-keys` or https://tools.reactpwa.com/vapid
     *  VAPID_PUBLIC - see above
     *  GEO_CODE_KEY - To get your own Geocode keys go to [opencagedata](https://opencagedata.com/users/sign_up)
     *  JWT_SECRET - "Fireflight Secret"  This is a terrible secret. Also, we should use a third-party auth library.*
@@ -194,6 +219,6 @@ These contribution guidelines have been adapted from [this good-Contributing.md-
 
 See [Frontend Documentation](https://github.com/labs15-forest-fire/frontend) for details on the fronend of our project.
 
-See [iOS Documentation](https://github.com/labs15-forest-fire/iOS) for details on the mobile iOS version of our project.
+<!-- See [iOS Documentation](https://github.com/labs15-forest-fire/iOS) for details on the mobile iOS version of our project. -->
 
 See [Data Science Documentation](https://github.com/labs15-forest-fire/Data-Science) for details on the data science behind our application.
