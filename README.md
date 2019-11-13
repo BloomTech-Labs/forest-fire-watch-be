@@ -1,4 +1,6 @@
-# API Documentation
+# Wildfire Watch - API Documentation
+
+You can find the deployed project at [wildfirewatchapp.com](https://wildfirewatchapp.com/).
 
 #### Backend deployed at [Heroku](https://wildfire-watch.herokuapp.com/) <br>
 
@@ -61,7 +63,7 @@ To get the server running locally:
     web-push: ^3.3.5"
 
 - devDependencies
-    nodemon: ^1.19.1,
+    nodemon: ^1.19.1
 
 ## Endpoints
 
