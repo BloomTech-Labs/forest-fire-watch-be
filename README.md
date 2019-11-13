@@ -34,6 +34,35 @@ To get the server running locally:
 - JWT: handling authorizations
 - PostgreSQL
 
+## Dependencies
+- dependencies:
+    apn: ^2.2.0,
+    axios: ^0.19.0,
+    bcryptjs: ^2.4.3,
+    child_process: ^1.0.2,
+    circular-json: ^0.5.9,
+    cors: ^2.8.5,
+    cross-env: ^5.2.0,
+    dotenv: ^8.0.0,
+    express: ^4.17.1,
+    helmet: ^3.20.0,
+    heroku: ^7.33.3,
+    jest: ^24.8.0,
+    jsonwebtoken: ^8.5.1,
+    knex: ^0.19.2,
+    knex-cleaner: ^1.3.0,
+    node-cron: ^2.0.3,
+    pg: ^7.12.1,
+    request-ip: ^2.1.3,
+    sqlite3: ^4.1.0,
+    supertest: "^4.0.2,
+    twilio: ^3.34.0,
+    validator: ^11.1.0,
+    web-push: ^3.3.5"
+
+- devDependencies
+    nodemon: ^1.19.1,
+
 ## Endpoints
 
 #### Auth Routes
