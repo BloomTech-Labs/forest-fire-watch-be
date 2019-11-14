@@ -2,7 +2,7 @@
 
 You can find the deployed project at [wildfirewatchapp.com](https://wildfirewatchapp.com/).
 
-#### Backend deployed at [Heroku](https://wildfire-watch.herokuapp.com/) <br>
+The backend is deployed at [Heroku](https://wildfire-watch.herokuapp.com/) <br>
 
 ## Getting started
 
@@ -18,71 +18,69 @@ To get the server running locally:
 
 ## Tech Stack
 
-### Backend framework
-
-- We chose Express because it is fast and un-opinionated.
-- Knex is just simple to use. It has good documentation for both SQLite and Postgresql.
-- Axios is easy to use. It supports Promises.
-- Firebase Auth is used on the front end for authentication then upon successful login or register BE is passed a UID associated with that user which then on register generates a JSON Web Token that is further used to verify and secure the account. 
-
-
 ### Backend built using:
 
 - NodeJS
-- ExpressJS
+- ExpressJS - fast and un-opinionated
 - Twilio
-- Firebase: email and password based authentication
+- Firebase: used for front-end for authentication and upon successful login/register, backend is passed a UID associated with that user which then generates a JSON Web Token
 - KnexJS: management of database structure
 - JWT: handling authorizations
 - PostgreSQL
+- Axios
 
 ## Dependencies
-- dependencies:
-    apn: ^2.2.0,
-    axios: ^0.19.0,
-    bcryptjs: ^2.4.3,
-    child_process: ^1.0.2,
-    circular-json: ^0.5.9,
-    cors: ^2.8.5,
-    cross-env: ^5.2.0,
-    dotenv: ^8.0.0,
-    express: ^4.17.1,
-    helmet: ^3.20.0,
-    heroku: ^7.33.3,
-    jest: ^24.8.0,
-    jsonwebtoken: ^8.5.1,
-    knex: ^0.19.2,
-    knex-cleaner: ^1.3.0,
-    node-cron: ^2.0.3,
-    pg: ^7.12.1,
-    request-ip: ^2.1.3,
-    sqlite3: ^4.1.0,
-    supertest: "^4.0.2,
-    twilio: ^3.34.0,
-    validator: ^11.1.0,
-    web-push: ^3.3.5"
 
-- devDependencies
-    nodemon: ^1.19.1
+```
+  apn: ^2.2.0,
+  axios: ^0.19.0,
+  bcryptjs: ^2.4.3,
+  child_process: ^1.0.2,
+  circular-json: ^0.5.9,
+  cors: ^2.8.5,
+  cross-env: ^5.2.0,
+  dotenv: ^8.0.0,
+  express: ^4.17.1,
+  helmet: ^3.20.0,
+  heroku: ^7.33.3,
+  jest: ^24.8.0,
+  jsonwebtoken: ^8.5.1,
+  knex: ^0.19.2,
+  knex-cleaner: ^1.3.0,
+  node-cron: ^2.0.3,
+  pg: ^7.12.1,
+  request-ip: ^2.1.3,
+  sqlite3: ^4.1.0,
+  supertest: "^4.0.2,
+  twilio: ^3.34.0,
+  validator: ^11.1.0,
+  web-push: ^3.3.5"
+```
+
+Dev-depencies:
+
+```
+nodemon: ^1.19.1
+```
 
 ## Endpoints
 
 #### Auth Routes
 
-| Method | Endpoint             | Access Control | Description                                                                                     |
-| ------ | -------------------- | -------------- | ----------------------------------------------------------------------------------------------- |
-| POST   | `/api/auth/register` | all users      | Takes in a JSON with email and password keys. Returns a JSON Web Token (string) as res.token |
-| POST   | `/api/auth/login`    | all users      | Generates and returns a token that will be used for all future calls that require authentication.                                                                |
+| Method | Endpoint             | Access Control | Description                                                                                       |
+| ------ | -------------------- | -------------- | ------------------------------------------------------------------------------------------------- |
+| POST   | `/api/auth/register` | all users      | Takes in a JSON with email and password keys. Returns a JSON Web Token (string) as res.token      |
+| POST   | `/api/auth/login`    | all users      | Generates and returns a token that will be used for all future calls that require authentication. |
 
 #### User Routes
 
-| Method | Endpoint             | Access Control | Description                                                                  |
-| ------ | -------------------- | -------------- | ---------------------------------------------------------------------------- |
-| GET    | `/api/users/session` | all users      | Returns info for the logged in user.                                         |
-| PUT    | `/api/users/`        | all users      | Takes in a JSON like this: { username: "newName" } and updates the username. |
-| DELETE | `/api/users/`        | all users      | Deletes the logged in user.                                                  |
-| PUT    | `/api/users/update/:id`| signed in    | Updates the requested user associated with the ID                            |
-| GET    | `/api/users/ip-address`| all users    | Takes the clients IP and returns the location data associated with it        |
+| Method | Endpoint                | Access Control | Description                                                                  |
+| ------ | ----------------------- | -------------- | ---------------------------------------------------------------------------- |
+| GET    | `/api/users/session`    | all users      | Returns info for the logged in user.                                         |
+| PUT    | `/api/users/`           | all users      | Takes in a JSON like this: { username: "newName" } and updates the username. |
+| DELETE | `/api/users/`           | all users      | Deletes the logged in user.                                                  |
+| PUT    | `/api/users/update/:id` | signed in      | Updates the requested user associated with the ID                            |
+| GET    | `/api/users/ip-address` | all users      | Takes the clients IP and returns the location data associated with it        |
 
 #### Location Routes
 
@@ -90,8 +88,8 @@ To get the server running locally:
 | ------ | -------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | GET    | `/api/locations/`    | all users      | Returns a list of locations for the logged in user.                                                                                    |
 | POST   | `/api/locations/`    | all users      | Takes in a JSON with "latitude", "longitude", "address", and a FOREIGN KEY called "user_id" and adds a location to the logged in user. |
-| PUT    | `/api/locations/:id` | all users      | Updates the location with the ID provided (only if the user owns that location).                                                        |
-| DELETE | `/api/locations/:id` | all users      | Deletes the location with the ID provided (only if the user owns that location).                                                   |
+| PUT    | `/api/locations/:id` | all users      | Updates the location with the ID provided (only if the user owns that location).                                                       |
+| DELETE | `/api/locations/:id` | all users      | Deletes the location with the ID provided (only if the user owns that location).                                                       |
 
 # Data Model
 
@@ -165,7 +163,7 @@ subscription: TEXT
 
 `findBy(filter)` -> Returns locations based on the passed in filter.
 
-`findByNotif(filter)` -> Returns  Locations and the user's preferences based on the passed in filter.
+`findByNotif(filter)` -> Returns Locations and the user's preferences based on the passed in filter.
 
 `add(location)` -> Adds a location. Returns the new location's ID.
 
