@@ -199,8 +199,8 @@ In order for the app to function correctly, the user must set up their own envir
 
 create a .env file that includes the following:
 
-    *  NODE_ENV - set to "development" until ready for "production"
-    *  TWILIO_ID - This app uses twillio to send text messages. You can get your own keys by going to [Twillio.com](https://twilio.com)
+    *  NODE_ENV - set to "development" for local development, and to "staging" or "production" in Heroku
+    *  TWILIO_ID - This app uses Twilio to send text messages. You can get your own keys by going to [Twilio.com](https://twilio.com)
     *  TWILIO_AUTH -  see above.
     *  VAPID_PRIVATE - `yarn global add web-push` then `web-push generate-vapid-keys` or https://tools.reactpwa.com/vapid
     *  VAPID_PUBLIC - see above
