@@ -69,6 +69,7 @@ router.post("/login", (req, res) => {
   Users.findBy({ UID })
     .first()
     .then(user => {
+      console.log("user", user);
       if (user) {
         const token = generateToken(user);
         console.log("login token", token);
@@ -78,7 +79,8 @@ router.post("/login", (req, res) => {
         });
       } else {
         if (!user) {
-          res.status(403).json({ message: "User does not exist" });
+          res.status(403).json({ error: "User does not exist" });
+          // return res.status(403).send("User does not exist");
         }
         // if (user && !bcrypt.compareSync(password, user.password)) {
         //   errors.password = "Login failed";
