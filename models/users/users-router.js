@@ -1,4 +1,7 @@
 const router = require("express").Router();
+const requestIp = require("request-ip");
+const axios = require('axios')
+const CircularJSON = require('circular-json');
 
 const Users = require("./users-model.js");
 const restricted = require("../../auth/restricted-middleware.js");
@@ -12,6 +15,20 @@ router.get("/", restricted, (req, res) => {
       console.log(err);
       res.send(err);
     });
+});
+
+router.get("/ip-address", (req, res) => {
+  const clientIp = requestIp.getClientIp(req);
+  axios.get(`http://ip-api.com/json/${clientIp}?fields=61439`).then(result => {
+    console.log("IP location", result)
+    const ipLocation = result
+    res.send(CircularJSON.stringify(ipLocation.data))
+  })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ err })
+    })
+
 });
 
 router.get("/user", restricted, (req, res) => {
