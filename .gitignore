@@ -2,3 +2,5 @@
 /node_modules
 *.db3
 push/info
+yarn.lock
+.DS_Store

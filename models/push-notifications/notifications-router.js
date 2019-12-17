@@ -4,16 +4,23 @@ const restricted = require("../../auth/restricted-middleware.js");
 const pusher = require("../../push/helper.js");
 
 //register the push worker to our database
-router.post('/register',restricted, async (req,res)=>{
-    try {
-        //get data and change to string, save to db
-        const subscription=req.body
-        let sub = JSON.stringify(subscription)
-        let userSub = await Notifications.add({subscription:sub, type:'web',user_id:req.jwt.user_id})
-        if(userSub)
-            res.status(201).json({});
-        else
-            res.status(400).json({message:'information not saved'})
+router.post('/register', restricted, async (req, res) => {
+  try {
+    //get data and change to string, save to db
+    const subscription = req.body
+    let sub = JSON.stringify(subscription)
+
+    console.log("sub: " + sub);
+    console.log(req.jwt.user_id);
+
+    const r = await Notifications.removeWebNotificationsForUser(req.jwt.user_id);
+    console.log(r);
+
+    let userSub = await Notifications.add({ subscription: sub, type: 'web', user_id: req.jwt.user_id })
+    if (userSub)
+      res.status(201).json({});
+    else
+      res.status(400).json({ message: 'information not saved' })
 
     console.log("user subscription recorded", req.jwt.user_id);
     //send to pusher in helper to save
@@ -32,7 +39,7 @@ router.post('/register',restricted, async (req,res)=>{
 
 //Save ios data to database
 router.post("/saveios", restricted, async (req, res) => {
-//decode data and check to make sure we have the device id
+  //decode data and check to make sure we have the device id
   const subscription = req.body;
   if (!"deviceId" in subscription) {
     res.status(400).json({ message: "deviceId not included" });
@@ -51,7 +58,7 @@ router.post("/saveios", restricted, async (req, res) => {
   } catch (err) {
     console.error("error :", err.message);
   }
-// push reponse removed on request of IOS
+  // push reponse removed on request of IOS
 });
 
 module.exports = router;
