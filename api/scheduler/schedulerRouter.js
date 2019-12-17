@@ -1,11 +1,9 @@
 const router = require("express").Router();
-const Locations = require("../../models/locations/locations-model");
-const { alertMessage } = require("../../sms/twilio");
-const push = require("../../push/helper");
-
-const scheduler_functions = require("./scheduler_functions");
+const { sendSmsAndPushNotifications } = require("./scheduler_functions");
+const restricted = require("../../auth/restricted-middleware.js");
 
 router.get("/", async (req, res) => {
+
   try {
     console.log("Running Scheduler");
 
@@ -66,34 +64,22 @@ router.get("/", async (req, res) => {
       const body = `There are ${nrFires} fires within ${alertLoc.radius} miles of ${alertLoc.address}. The closest fire, ${closestFireName}, is ${closestDistance} miles from your location.`;
       console.log(`notification_timer: ${alertLoc.notification_timer}`);
 
-      // if (alertLoc.notification_timer === 0) {
-      // if (alertLoc.receive_sms) {
-      //   alertMessage(alertLoc.cell_number, body);
-      // }
+  await sendSmsAndPushNotifications();
+});
 
-      console.log("receive_push: " + alertLoc.receive_push);
-      console.log("user_id: " + alertLoc.user_id);
-      console.log("user_id: " + Object.keys(alertLoc));
 
-      if (alertLoc.receive_push) {
-        push(alertLoc.user_id, {
-          title: "Wildfire Notification",
-          body: body
-        });
-      }
-      // }
+router.get("/triggerSMS", restricted, async (req, res) => {
+  const user_id = req.jwt.user_id;
+  console.log(user_id);
 
-      if (alertLoc.notification_timer === 12) {
-        await Locations.update(alertLoc.id, { notification_timer: 0 });
-      } else {
-        await Locations.update(alertLoc.id, {
-          notification_timer: alertLoc.notification_timer + 1
-        });
-      }
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  await sendSmsAndPushNotifications(user_id, true, false);
+});
+
+router.get("/triggerPush", restricted, async (req, res) => {
+  const user_id = req.jwt.user_id;
+  console.log(user_id);
+
+  await sendSmsAndPushNotifications(user_id, false, true);
 });
 
 module.exports = router;

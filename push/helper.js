@@ -11,8 +11,6 @@ webpush.setVapidDetails(
     privateVapid
 );
 
-console.log("PRIVATE", privateVapid);
-
 /**
  * push to a service
  * @param {string}   id id of user
@@ -36,7 +34,9 @@ const push = async (id, configs) => {
         let subData;
         if (subscription.type == "web")
             subData = JSON.parse(subscription.subscription);
-        else subData = subscription.subscription;
+        else
+            subData = subscription.subscription;
+
         //if web and first sent to web
         if (subscription.type == "web" && !web) {
             try {

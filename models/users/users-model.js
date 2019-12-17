@@ -41,6 +41,7 @@ function update(id, changes) {
     .where({ id })
     .update(changes, "*");
 }
+
 function updateEmail(UID, changes) {
   return db("users")
     .where({ UID })
