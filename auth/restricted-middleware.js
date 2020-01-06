@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
   const secret = process.env.JWT_SECRET || "FireFlight Secret!";
 
   if (token) {
-    jwt.verify(token, secret, {}, (err, decoded) => {
+    jwt.verify(token, secret, (err, decoded) => {
       console.log("decoded", decoded);
       if (err) {
         //invalid token

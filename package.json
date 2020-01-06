@@ -34,7 +34,7 @@
     "supertest": "^4.0.2",
     "twilio": "^3.34.0",
     "validator": "^11.1.0",
-    "web-push": "^3.3.5"
+    "web-push": "^3.4.3"
   },
   "devDependencies": {
     "nodemon": "^1.19.4"
