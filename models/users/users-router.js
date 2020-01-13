@@ -6,16 +6,19 @@ const CircularJSON = require('circular-json');
 const Users = require("./users-model.js");
 const restricted = require("../../auth/restricted-middleware.js");
 
-router.get("/", restricted, (req, res) => {
-  Users.find()
-    .then(users => {
-      res.json(users);
-    })
-    .catch(err => {
-      console.log(err);
-      res.send(err);
-    });
-});
+// Removed /users GET because it allowed any user with a valid token/UID
+// to get all information on all users, including email, phone number and UID
+
+// router.get("/", restricted, (req, res) => {
+//   Users.find()
+//     .then(users => {
+//       res.json(users);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.send(err);
+//     });
+// });
 
 router.get("/ip-address", (req, res) => {
   const clientIp = requestIp.getClientIp(req);
