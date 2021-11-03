@@ -33,7 +33,7 @@
     "sqlite3": "^4.0.9",
     "supertest": "^4.0.2",
     "twilio": "^3.34.0",
-    "validator": "^11.1.0",
+    "validator": "^13.7.0",
     "web-push": "^3.4.3"
   },
   "devDependencies": {
